@@ -5,8 +5,8 @@
 
 typedef struct
 {
-    const char **fields;
+    const char **strings;
     uint32_t size;
-} Fields;
+} Strings;
 
 #endif
