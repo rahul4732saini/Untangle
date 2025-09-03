@@ -5,7 +5,7 @@
 
 typedef struct
 {
-    char **fields;
+    const char **fields;
     uint32_t size;
 } Fields;
 
