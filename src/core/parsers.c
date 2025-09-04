@@ -21,3 +21,18 @@ integer_t *parse_int(char *src)
 
     return result;
 }
+
+double *parse_float(char *src)
+{
+    double *result = (double *)malloc(sizeof(double));
+
+    // Frees the memory and returns NULL if the source string does
+    // not represent a floating point number.
+    if (sscanf(src, "%lf", result) != 1)
+    {
+        free(result);
+        return NULL;
+    }
+
+    return result;
+}
