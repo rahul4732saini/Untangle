@@ -36,3 +36,8 @@ double *parse_float(char *src)
 
     return result;
 }
+
+char *parse_string(char *src)
+{
+    return src;
+}
