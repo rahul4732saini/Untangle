@@ -13,7 +13,7 @@ integer_t *parse_int(char *src)
 
     // Frees the memory and returns NULL if the source string does
     // not represent an integer.
-    if (!sscanf(src, "%lld", result))
+    if (sscanf(src, "%lld", result) != 1)
     {
         free(result);
         return NULL;
