@@ -10,29 +10,34 @@ void *(*parsers[])(char *);
 integer_t *parse_int(char *src)
 {
     integer_t *result = (integer_t *)malloc(sizeof(integer_t));
+    len_t ctr;
+
+    len_t matched = sscanf(src, "%lld%n", result, &ctr);
+
+    if (matched == 1 && !src[ctr])
+        return result;
 
     // Frees the memory and returns NULL if the source string does
     // not represent an integer.
-    if (sscanf(src, "%lld", result) != 1)
-    {
-        free(result);
-        return NULL;
-    }
-
-    return result;
+    free(result);
+    return NULL;
 }
 
 double *parse_float(char *src)
 {
     double *result = (double *)malloc(sizeof(double));
+    len_t ctr;
+
+    len_t matched = sscanf(src, "%lf%n", result, &ctr);
+
+    if (matched == 1 && !src[ctr])
+        return result;
 
     // Frees the memory and returns NULL if the source string does
-    // not represent a floating point number.
-    if (sscanf(src, "%lf", result) != 1)
-    {
-        free(result);
-        return NULL;
-    }
+    // not represent an floating point number.
+    free(result);
+    return NULL;
+}
 
     return result;
 }
