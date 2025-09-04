@@ -24,4 +24,11 @@ typedef struct
     len_t size;
 } Result;
 
+typedef struct
+{
+    const dtype_t *args;
+    const len_t args_size;
+    Result *(*handler)(void *, ...);
+} Problem;
+
 #endif
