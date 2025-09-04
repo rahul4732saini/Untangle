@@ -6,7 +6,7 @@
 typedef struct
 {
     const char **strings;
-    uint32_t size;
+    const uint32_t size;
 } Strings;
 
 #endif
