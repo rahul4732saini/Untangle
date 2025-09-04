@@ -28,6 +28,7 @@ typedef struct
 {
     const dtype_t *args;
     const len_t args_size;
+    const Strings *prompts;
     Result *(*handler)(void *, ...);
 } Problem;
 
