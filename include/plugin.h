@@ -18,4 +18,10 @@ typedef struct
     void *data;
 } ResultStep;
 
+typedef struct
+{
+    ResultStep *steps;
+    len_t size;
+} Result;
+
 #endif
