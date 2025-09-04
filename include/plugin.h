@@ -1,5 +1,5 @@
-#ifndef _SHARED_PLUGIN_H
-#define _SHARED_PLUGIN_H
+#ifndef _PLUGIN_H
+#define _PLUGIN_H
 
 #include <stdint.h>
 
