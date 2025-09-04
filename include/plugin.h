@@ -9,12 +9,12 @@ typedef uint32_t len_t;
 typedef struct
 {
     const char **strings;
-    const len_t size;
+    len_t size;
 } Strings;
 
 typedef struct
 {
-    const dtype_t type;
+    dtype_t type;
     void *data;
 } ResultStep;
 
@@ -27,7 +27,7 @@ typedef struct
 typedef struct
 {
     const dtype_t *args;
-    const len_t args_size;
+    len_t args_size;
     const Strings *prompts;
     Result *(*handler)(void *, ...);
 } Problem;
