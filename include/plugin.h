@@ -9,7 +9,13 @@ typedef uint32_t len_t;
 typedef struct
 {
     const char **strings;
-    const uint32_t size;
+    const len_t size;
 } Strings;
+
+typedef struct
+{
+    const dtype_t type;
+    void *data;
+} ResultStep;
 
 #endif
