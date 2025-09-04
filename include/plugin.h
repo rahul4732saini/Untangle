@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 
+typedef uint16_t dtype_t;
+typedef uint32_t len_t;
+
 typedef struct
 {
     const char **strings;
