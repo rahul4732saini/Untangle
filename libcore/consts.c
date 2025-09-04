@@ -4,7 +4,7 @@
  */
 
 #include <stdint.h>
-#include "plugin.h"
+#include "structs.h"
 
 static const char *fields_arr[] = {
     "Mathematics",

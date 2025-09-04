@@ -1,4 +1,4 @@
-#include "plugin.h"
+#include "structs.h"
 #include "consts.h"
 
 const Strings *get_fields(void)

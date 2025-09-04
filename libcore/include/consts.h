@@ -2,7 +2,7 @@
 #define _CONSTS_H
 
 #include <stdint.h>
-#include "plugin.h"
+#include "structs.h"
 
 extern const Strings fields;
 
