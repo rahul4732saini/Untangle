@@ -16,7 +16,6 @@
 #define TYPE_EQUATION 6
 #define TYPE_EXPRESSION 7
 #define TYPE_ARRAY 8
-#define TYPE_SET 9
-#define TYPE_MATRIX 10
+#define TYPE_MATRIX 9
 
 #endif
