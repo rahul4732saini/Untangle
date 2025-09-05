@@ -63,9 +63,6 @@ double *parse_float(char *src)
     return NULL;
 }
 
-    return result;
-}
-
 char *parse_string(char *src)
 {
     return src;
