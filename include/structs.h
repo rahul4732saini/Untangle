@@ -30,6 +30,13 @@ typedef struct
 typedef struct
 {
     const char *name;
+    Problem *problems;
+    len_t problems_size;
+} Field;
+
+typedef struct
+{
+    const char *name;
     const dtype_t *args;
     len_t args_size;
     const Strings *prompts;
