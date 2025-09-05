@@ -9,6 +9,11 @@ typedef struct
     len_t size;
 } Strings;
 
+typedef struct {
+	double real;
+	double imag;
+} Number;
+
 typedef struct
 {
     dtype_t type;
