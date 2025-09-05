@@ -34,7 +34,7 @@ bool *parse_bool(char *src)
 integer_t *parse_int(char *src)
 {
     integer_t *result = (integer_t *)malloc(sizeof(integer_t));
-    len_t ctr;
+    len_t ctr = 0;
 
     len_t matched = sscanf(src, "%lld%n", result, &ctr);
 
@@ -50,7 +50,7 @@ integer_t *parse_int(char *src)
 double *parse_float(char *src)
 {
     double *result = (double *)malloc(sizeof(double));
-    len_t ctr;
+    len_t ctr = 0;
 
     len_t matched = sscanf(src, "%lf%n", result, &ctr);
 
