@@ -30,6 +30,13 @@ typedef struct
 typedef struct
 {
     const char *name;
+    Field *fields;
+    len_t fields_size;
+} Domain;
+
+typedef struct
+{
+    const char *name;
     Problem *problems;
     len_t problems_size;
 } Field;
