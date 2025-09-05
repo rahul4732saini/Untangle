@@ -63,6 +63,46 @@ double *parse_float(char *src)
     return NULL;
 }
 
+Number *parse_complex(char *src) {
+	Number *result = (Number *)malloc(sizeof(Number));
+	result->real = 0;
+
+	len_t ctr = 0, cnt = 0;
+	len_t matched = sscanf(src, "%lfj%n", &result->imag, &ctr);
+
+	if (matched == 1 && !src[ctr])
+		return result;
+	
+	if (sscanf(src, "%lf%n", &result->real, &ctr) != 1)
+		goto fail;
+
+	sscanf(src + ctr, "%*[ ]%n", &cnt);
+	ctr += cnt;
+
+	if (src[ctr] != '+')
+		goto fail;
+
+	++ctr;
+	cnt = 0;
+
+	sscanf(src + ctr, "%*[ ]%n", &cnt);
+	ctr += cnt;
+
+	cnt = 0;
+	matched = sscanf(src + ctr, "%lfj%n", &result->imag, &cnt);
+	ctr += cnt;
+
+	if (matched == 1 && !src[ctr])
+		return result;
+
+	// Frees the memory and returns NULL if the source string
+	// does not represent a valid complex number.
+	fail:
+
+	free(result);
+	return NULL;
+}
+
 char *parse_string(char *src)
 {
     return src;
