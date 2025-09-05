@@ -5,12 +5,6 @@
 
 typedef struct
 {
-    const char **strings;
-    len_t size;
-} Strings;
-
-typedef struct
-{
     double real;
     double imag;
 } Number;
