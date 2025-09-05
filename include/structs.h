@@ -46,7 +46,8 @@ typedef struct
     const char *name;
     const dtype_t *args;
     len_t args_size;
-    const Strings *prompts;
+    const char **prompts;
+    len_t prompts_size;
     Result *(*handler)(void *, ...);
 } Problem;
 
