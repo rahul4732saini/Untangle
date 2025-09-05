@@ -7,13 +7,13 @@
 #include "tools.h"
 
 // Stores pointers to the data type parser functions.
-void *(*parsers[])(char *) {
-	parse_bool,
-	parse_int,
-	parse_float,
-	parse_complex,
-	parse_numeric,
-	parse_string,
+void *(*parsers[])(char *) = {
+    parse_bool,
+    parse_int,
+    parse_float,
+    parse_complex,
+    parse_numeric,
+    parse_string,
 };
 
 bool *parse_bool(char *src)
@@ -70,77 +70,82 @@ double *parse_float(char *src)
     return NULL;
 }
 
-Number *parse_complex(char *src) {
-	Number *result = (Number *)malloc(sizeof(Number));
-	result->real = 0;
+Number *parse_complex(char *src)
+{
+    Number *result = (Number *)malloc(sizeof(Number));
+    result->real = 0;
 
-	len_t ctr = 0, cnt = 0;
-	len_t matched = sscanf(src, "%lfj%n", &result->imag, &ctr);
+    len_t ctr = 0, cnt = 0;
+    len_t matched = sscanf(src, "%lfj%n", &result->imag, &ctr);
 
-	if (matched == 1 && !src[ctr])
-		return result;
-	
-	if (sscanf(src, "%lf%n", &result->real, &ctr) != 1)
-		goto fail;
+    if (matched == 1 && !src[ctr])
+        return result;
 
-	sscanf(src + ctr, "%*[ ]%n", &cnt);
-	ctr += cnt;
+    if (sscanf(src, "%lf%n", &result->real, &ctr) != 1)
+        goto fail;
 
-	if (src[ctr] != '+')
-		goto fail;
+    sscanf(src + ctr, "%*[ ]%n", &cnt);
+    ctr += cnt;
 
-	++ctr;
-	cnt = 0;
+    if (src[ctr] != '+')
+        goto fail;
 
-	sscanf(src + ctr, "%*[ ]%n", &cnt);
-	ctr += cnt;
+    ++ctr;
+    cnt = 0;
 
-	cnt = 0;
-	matched = sscanf(src + ctr, "%lfj%n", &result->imag, &cnt);
-	ctr += cnt;
+    sscanf(src + ctr, "%*[ ]%n", &cnt);
+    ctr += cnt;
 
-	if (matched == 1 && !src[ctr])
-		return result;
+    cnt = 0;
+    matched = sscanf(src + ctr, "%lfj%n", &result->imag, &cnt);
+    ctr += cnt;
 
-	// Frees the memory and returns NULL if the source string
-	// does not represent a complex number.
-	fail:
+    if (matched == 1 && !src[ctr])
+        return result;
 
-	free(result);
-	return NULL;
+// Frees the memory and returns NULL if the source string
+// does not represent a complex number.
+fail:
+
+    free(result);
+    return NULL;
 }
 
-Number *parse_numeric(char *src) {
-	Number *result = (Number *)malloc(sizeof(Number));
-	result->imag = 0;
+Number *parse_numeric(char *src)
+{
+    Number *result = (Number *)malloc(sizeof(Number));
+    result->imag = 0;
 
-	void *data;
+    void *data;
 
-	if ((data = parse_int(src))) {
-		result->real = (double) *(integer_t *) data;
-	}
+    if ((data = parse_int(src)))
+    {
+        result->real = (double)*(integer_t *)data;
+    }
 
-	else if ((data = parse_float(src))) {
-		result->real = *(double *) data;
-	}
+    else if ((data = parse_float(src)))
+    {
+        result->real = *(double *)data;
+    }
 
-	else if ((data = parse_complex(src))) {
-		*result = *(Number *) data;
-	}
+    else if ((data = parse_complex(src)))
+    {
+        *result = *(Number *)data;
+    }
 
-	// Frees the memory and returns NULL if the source string
-	// does not represent a number.
-	else {
-		free(result);
-		return NULL;
-	}
+    // Frees the memory and returns NULL if the source string
+    // does not represent a number.
+    else
+    {
+        free(result);
+        return NULL;
+    }
 
-	free(data);
-	return result;
+    free(data);
+    return result;
 }
 
 char *parse_string(char *src)
 {
     return src;
 }
-
