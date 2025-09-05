@@ -96,11 +96,40 @@ Number *parse_complex(char *src) {
 		return result;
 
 	// Frees the memory and returns NULL if the source string
-	// does not represent a valid complex number.
+	// does not represent a complex number.
 	fail:
 
 	free(result);
 	return NULL;
+}
+
+Number *parse_numeric(char *src) {
+	Number *result = (Number *)malloc(sizeof(Number));
+	result->imag = 0;
+
+	void *data;
+
+	if ((data = parse_int(src))) {
+		result->real = (double) *(integer_t *) data;
+	}
+
+	else if ((data = parse_float(src))) {
+		result->real = *(double *) data;
+	}
+
+	else if ((data = parse_complex(src))) {
+		*result = *(Number *) data;
+	}
+
+	// Frees the memory and returns NULL if the source string
+	// does not represent a number.
+	else {
+		free(result);
+		return NULL;
+	}
+
+	free(data);
+	return result;
 }
 
 char *parse_string(char *src)
