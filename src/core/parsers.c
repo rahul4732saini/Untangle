@@ -7,7 +7,14 @@
 #include "tools.h"
 
 // Stores pointers to the data type parser functions.
-void *(*parsers[])(char *);
+void *(*parsers[])(char *) {
+	parse_bool,
+	parse_int,
+	parse_float,
+	parse_complex,
+	parse_numeric,
+	parse_string,
+};
 
 bool *parse_bool(char *src)
 {
@@ -136,3 +143,4 @@ char *parse_string(char *src)
 {
     return src;
 }
+
