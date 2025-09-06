@@ -56,8 +56,11 @@ static char *get_plugin_dir(void)
     char *buff = (char *)malloc(MAX_PATH + strlen(plugin_dir) + 2);
     len_t length = GetCurrentDirectory(MAX_PATH, buff);
 
-    // Adds the relative path to the plugin directory at the end.
-    sprintf(buff + length, "\\%s\\", plugin_dir);
+    // Adds the relative path to the plugin directory at the end and
+    // converts it into a Windows compatible path.
+    sprintf(buff + length, "\\%s", plugin_dir);
+    convert_unix_path(buff + length);
+
     return buff;
 }
 
