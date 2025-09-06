@@ -2,6 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <dirent.h>
+#include <dlfcn.h>
 
 #include "consts.h"
 #include "typedefs.h"
@@ -13,6 +14,10 @@
 
 const char *lib_file_suffix = ".so";
 const len_t lib_file_suffix_len = 3;
+
+// Library open mode to load the symbols lazily and load them
+// locally to avoid any conflicts and also ensure performance.
+const lib_open_mode = RTLD_LAZY | RTLD_LOCAL;
 
 void **handlers = NULL;
 PluginFunctions functions;
