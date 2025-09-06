@@ -5,11 +5,18 @@
 
 #include "consts.h"
 #include "typedefs.h"
+#include "shared.h"
+#include "structs.h"
 
 #define DEFAULT_PATH_BUFF_SIZE 256
 #define PATH_BUFF_INC_STEP 8
 
 const char *lib_file_suffix = ".so";
+
+void *handlers = NULL;
+PluginFunctions functions;
+
+len_t plugin_count;
 
 /**
  * @brief Extracts the absolute path to the plugin directory.
