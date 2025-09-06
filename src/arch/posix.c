@@ -20,7 +20,7 @@ const len_t lib_file_suffix_len = 3;
 const lib_open_mode = RTLD_LAZY | RTLD_LOCAL;
 
 void **handlers = NULL;
-PluginFunctions functions;
+PluginFunctions plugins;
 
 len_t plugin_count;
 
