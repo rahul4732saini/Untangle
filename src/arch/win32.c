@@ -55,15 +55,7 @@ static len_t get_plugin_count(char *path)
 
     do
     {
-        if (fs_entry.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-            continue;
-
-        char *match = strstr(fs_entry.cFileName, lib_file_suffix);
-
-        // Skips if no match is found or there are more characters
-        // present ahead of the expected suffix.
-        if (match && !match[lib_file_suffix_len])
-            ++ctr;
+        ctr += is_valid_plugin_file(&fs_entry);
 
     } while (FindNextFile(hFind, &fs_entry));
 
