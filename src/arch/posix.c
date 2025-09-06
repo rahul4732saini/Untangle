@@ -1,3 +1,8 @@
+/**
+ * @file posix.c
+ * @brief Defines platform-dependent functionalities for POSIX-compliant systems.
+ */
+
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -41,7 +46,7 @@ static char *get_plugin_dir(void)
     }
 
     // Expands the buffer to also add the plugin directory path at the
-    // end, and 1 more charcter for the '/' before the plugin directory
+    // end, and 1 more character for the '/' before the plugin directory
     // path.
     size += strlen(plugin_dir) + 1;
     buff = (char *)realloc(buff, size);
