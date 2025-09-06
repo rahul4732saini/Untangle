@@ -1,3 +1,8 @@
+/**
+ * @file posix.c
+ * @brief Defines platform-dependent functionalities for Windows systems.
+ */
+
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
