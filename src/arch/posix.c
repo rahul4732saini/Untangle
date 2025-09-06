@@ -91,7 +91,7 @@ static len_t get_plugin_count(char *path)
 }
 
 /**
- * @brief Extracts the domains extracter functions from the plugin libraries.
+ * @brief Extracts plugin data from the plugin libraries.
  */
 PluginsData *get_plugins(void)
 {
@@ -106,7 +106,7 @@ PluginsData *get_plugins(void)
     len_t dir_path_len = strlen(dir_path);
 
     handlers = malloc(file_cnt * sizeof(void *));
-    plugins.plugins = (PluginsData *)malloc(file_cnt * sizeof(PluginData));
+    plugins.plugins = (PluginData *)malloc(file_cnt * sizeof(PluginData));
 
     // Keeps track of the current index in the handlers and functions array.
     len_t ctr = 0;
@@ -121,7 +121,7 @@ PluginsData *get_plugins(void)
 
         // Extracts and saves the absolute path to the plugin library to avoid
         // loading a library from the global environment if the name conflicts.
-        char buff[dir_path_len + strlen(entry->d_name) + 1];
+        char buff[dir_path_len + strlen(entry->d_name)];
         strcpy(buff, dir_path);
         strcat(buff, entry->d_name);
 
@@ -135,8 +135,7 @@ PluginsData *get_plugins(void)
         Domains *(**function)(void) = (Domains * (**)(void)) dlsym(handler, plugin_domain_func);
         char **name = (char **)dlsym(handler, plugin_name_var);
 
-        // Continues if the target function or variable was not found
-        // in the library.
+        // Continues if the target function or variable was not found in the library.
         if (!function || !name)
         {
             dlclose(handler);
