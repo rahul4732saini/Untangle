@@ -5,6 +5,9 @@
 #include "consts.h"
 #include "typedefs.h"
 
+static const char *lib_file_suffix = ".dll";
+static const len_t lib_file_suffix_len = 4;
+
 /**
  * @brief Extracts the absolute path to the plugin directory.
  */
