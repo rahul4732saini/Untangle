@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <dirent.h>
 
 #include "consts.h"
 #include "typedefs.h"
@@ -36,4 +37,22 @@ static char *get_plugin_dir(void)
     strcat(buff, plugin_dir);
 
     return buff;
+}
+
+/**
+ * @brief Extracts the number of files within a directory.
+ */
+static len_t get_file_count(char *path)
+{
+    DIR *dir = opendir(path);
+    struct dirent *entry;
+
+    len_t ctr = 0;
+
+    while ((entry = readdir(dir)))
+        if (entry->d_type == DT_REG)
+            ++ctr;
+
+    closedir(dir);
+    return ctr;
 }
