@@ -1,5 +1,5 @@
 // Relative path to the plugin directory.
-const char *plugin_dir = "plugin/";
+const char *plugin_dir = "plugin";
 
 // Name of the function within the plugins to extract domain
 // related details, meant for locating it within the plugin.
