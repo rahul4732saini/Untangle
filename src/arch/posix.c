@@ -47,9 +47,9 @@ static char *get_plugin_dir(void)
 }
 
 /**
- * @brief Extracts the number of files within a directory.
+ * @brief Extracts the number of plugin files within a directory.
  */
-static len_t get_file_count(char *path)
+static len_t get_plugin_count(char *path)
 {
     DIR *dir = opendir(path);
     struct dirent *entry;
@@ -57,8 +57,15 @@ static len_t get_file_count(char *path)
     len_t ctr = 0;
 
     while ((entry = readdir(dir)))
-        if (entry->d_type == DT_REG)
+    {
+        if (entry->d_type != DT_REG)
+            continue;
+
+        char *match = strstr(entry->d_name, lib_file_suffix);
+
+        if (match && !strcmp(match, lib_file_suffix))
             ++ctr;
+    }
 
     closedir(dir);
     return ctr;
