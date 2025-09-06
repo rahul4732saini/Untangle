@@ -13,7 +13,7 @@
 
 const char *lib_file_suffix = ".so";
 
-void *handlers = NULL;
+void **handlers = NULL;
 PluginFunctions functions;
 
 len_t plugin_count;
