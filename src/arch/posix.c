@@ -64,7 +64,9 @@ static len_t get_plugin_count(char *path)
 
         char *match = strstr(entry->d_name, lib_file_suffix);
 
-        if (match && !strcmp(match, lib_file_suffix))
+        // Skips if no match is found or there are more characters
+        // present ahead of the expected suffix.
+        if (match && !match[lib_file_suffix_len])
             ++ctr;
     }
 
