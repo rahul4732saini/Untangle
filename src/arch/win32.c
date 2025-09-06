@@ -4,11 +4,17 @@
 #include <windows.h>
 
 #include "consts.h"
+#include "shared.h"
 #include "typedefs.h"
 #include "structs.h"
 
 static const char *lib_file_suffix = ".dll";
 static const len_t lib_file_suffix_len = 4;
+
+HMODULE *handlers = NULL;
+PluginFunctions plugins;
+
+len_t plugin_count;
 
 /**
  * @brief Validates the specified directory entry for a plugin file.
