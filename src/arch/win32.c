@@ -12,7 +12,7 @@ static const char *lib_file_suffix = ".dll";
 static const len_t lib_file_suffix_len = 4;
 
 HMODULE *handlers = NULL;
-PluginFunctions plugins;
+PluginsData plugins;
 
 len_t plugin_count;
 
