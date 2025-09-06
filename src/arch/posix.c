@@ -7,6 +7,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <dirent.h>
+#include <stdbool.h>
 #include <dlfcn.h>
 
 #include "consts.h"
@@ -115,7 +116,7 @@ Domains *(**get_plugins(void))(void)
     len_t dir_path_len = strlen(dir_path);
 
     handlers = malloc(file_cnt * sizeof(void *));
-    plugins.functions = ((Domain * (**)(void)) malloc(file_cnt * sizeof(Domain * (*)(void))));
+    plugins.functions = (Domains * (**)(void)) malloc(file_cnt * sizeof(Domains * (*)(void)));
 
     // Keeps track of the current index in the handlers and functions array.
     len_t ctr = 0;
