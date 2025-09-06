@@ -84,17 +84,7 @@ static len_t get_plugin_count(char *path)
     len_t ctr = 0;
 
     while ((entry = readdir(dir)))
-    {
-        if (entry->d_type != DT_REG)
-            continue;
-
-        char *match = strstr(entry->d_name, lib_file_suffix);
-
-        // Skips if no match is found or there are more characters
-        // present ahead of the expected suffix.
-        if (match && !match[lib_file_suffix_len])
-            ++ctr;
-    }
+        ctr += is_valid_plugin_file(entry);
 
     closedir(dir);
     return ctr;
@@ -126,12 +116,7 @@ Domains *(**get_plugins(void))(void)
 
     while ((entry = readdir(dir)))
     {
-        if (entry->d_type != DT_REG)
-            continue;
-
-        char *match = strstr(entry->d_name, lib_file_suffix);
-
-        if (!match || match[lib_file_suffix_len])
+        if (!is_valid_plugin_file(entry))
             continue;
 
         // Extracts and saves the absolute path to the plugin library to avoid
