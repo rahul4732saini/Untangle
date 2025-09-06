@@ -125,7 +125,7 @@ Domains *(**get_plugins(void))(void)
         if (!handler)
             continue;
 
-        Domains *(*function)(void) = dlsym(handler, plugin_domain_func);
+        Domains *(**function)(void) = dlsym(handler, plugin_domain_func);
 
         // Continues if the target function was not found in the library.
         if (!function)
@@ -136,7 +136,7 @@ Domains *(**get_plugins(void))(void)
 
         // Stores the handler and the function, and updates the counter.
         handlers[ctr] = handler;
-        plugins.functions[ctr++] = function;
+        plugins.functions[ctr++] = *function;
     }
 
     // Saves the counter for future usage.
