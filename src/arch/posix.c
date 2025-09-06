@@ -8,6 +8,8 @@
 #define DEFAULT_PATH_BUFF_SIZE 256
 #define PATH_BUFF_INC_STEP 8
 
+const char *lib_file_suffix = ".so";
+
 /**
  * @brief Extracts the absolute path to the plugin directory.
  */
