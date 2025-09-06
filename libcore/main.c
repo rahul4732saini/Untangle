@@ -1,12 +1,7 @@
 #include "structs.h"
-#include "consts.h"
+#include "topics.h"
 
-const Strings *get_fields(void)
+const Domains *get_domains(void)
 {
-    return &fields;
-}
-
-const Strings *get_domains(uint32_t inx)
-{
-    return domains[inx];
+    return &domains;
 }
