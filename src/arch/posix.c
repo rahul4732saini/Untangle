@@ -148,6 +148,8 @@ Domains *(**get_plugins(void))(void)
     plugins.size = plugin_count = ctr;
 
     free(dir_path);
+    closedir(dir);
+
     return &plugins;
 }
 
