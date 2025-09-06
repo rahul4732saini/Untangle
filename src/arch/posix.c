@@ -12,17 +12,17 @@
 #define DEFAULT_PATH_BUFF_SIZE 256
 #define PATH_BUFF_INC_STEP 8
 
-const char *lib_file_suffix = ".so";
-const len_t lib_file_suffix_len = 3;
+static const char *lib_file_suffix = ".so";
+static const len_t lib_file_suffix_len = 3;
 
 // Library open mode to load the symbols lazily and load them
 // locally to avoid any conflicts and also ensure performance.
-const lib_open_mode = RTLD_LAZY | RTLD_LOCAL;
+static const lib_open_mode = RTLD_LAZY | RTLD_LOCAL;
 
-void **handlers = NULL;
-PluginFunctions plugins;
+static void **handlers = NULL;
+static PluginFunctions plugins;
 
-len_t plugin_count;
+static len_t plugin_count;
 
 /**
  * @brief Extracts the absolute path to the plugin directory.
