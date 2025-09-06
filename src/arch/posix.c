@@ -12,6 +12,7 @@
 #define PATH_BUFF_INC_STEP 8
 
 const char *lib_file_suffix = ".so";
+const len_t lib_file_suffix_len = 3;
 
 void **handlers = NULL;
 PluginFunctions functions;
