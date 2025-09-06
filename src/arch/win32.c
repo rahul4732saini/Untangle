@@ -88,3 +88,73 @@ static len_t get_plugin_count(char *path)
     FindClose(hFind);
     return ctr;
 }
+
+/**
+ * @brief Extracts plugin data from the plugin libraries.
+ */
+PluginsData *get_plugins(void)
+{
+    if (handlers)
+        return &plugins;
+
+    char *dir_path = get_plugin_dir();
+
+    len_t file_cnt = get_plugin_count(dir_path);
+    len_t dir_path_len = strlen(dir_path);
+
+    // Creates a separate buffer to store the directory path and the
+    // pattern specification to include all the file and directories.
+    char pattern[dir_path_len + 1];
+    sprintf(pattern, "%s*", dir_path);
+
+    handlers = (HMODULE *)malloc(file_cnt * sizeof(HMODULE));
+    plugins.plugins = (PluginData *)malloc(file_cnt * sizeof(PluginData));
+
+    len_t ctr = 0;
+
+    WIN32_FIND_DATA fs_entry;
+    HANDLE hFind = FindFirstFile(pattern, &fs_entry);
+
+    do
+    {
+        if (!is_valid_plugin_file(&fs_entry))
+            continue;
+
+        // Creates a separate buffer to store the absolute path of the library file.
+        char buff[dir_path_len + strlen(fs_entry.cFileName)];
+        strcpy(buff, dir_path);
+        strcat(buff, fs_entry.cFileName);
+
+        HMODULE lib = LoadLibrary(buff);
+
+        // Continues if the library cannot be opened successfully.
+        if (!lib)
+            continue;
+
+        Domains *(**function)(void) = (Domains * (**)(void)) GetProcAddress(lib, plugin_domain_func);
+        char **name = (char **)GetProcAddress(lib, plugin_name_var);
+
+        // Continues if the target function or variable was not found in the library.
+        if (!function || !name)
+        {
+            FreeLibrary(lib);
+            continue;
+        }
+
+        // Stores the library handler and the plugin data.
+        handlers[ctr] = lib;
+        plugins.plugins[ctr++] = (PluginData){
+            .name = *name,
+            .function = *function,
+        };
+
+    } while (FindNextFile(hFind, &fs_entry));
+
+    // Saves the counter for future usage.
+    plugins.size = plugin_count = ctr;
+
+    FindClose(hFind);
+    free(dir_path);
+
+    return &plugins;
+}
