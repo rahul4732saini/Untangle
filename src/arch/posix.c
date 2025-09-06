@@ -145,3 +145,24 @@ Domains *(**get_plugins(void))(void)
     free(dir_path);
     return &plugins;
 }
+
+/**
+ * @details Closes the plugin libraries and frees up heap memory.
+ */
+void clean(void)
+{
+    // Skips the clean process if it has already been done.
+    if (!handlers)
+        return;
+
+    // Closes all the dynamically loaded plugin libraries.
+    for (len_t i = 0; i < plugin_count; ++i)
+        dlclose(handlers[i]);
+
+    free(handlers);
+    free(plugins.functions);
+
+    // Resets the variables to their defaults to mark them as un-initialized.
+    handlers = NULL;
+    plugin_count = plugins.size = 0;
+}
