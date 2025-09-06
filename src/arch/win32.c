@@ -22,6 +22,18 @@ PluginsData plugins;
 len_t plugin_count;
 
 /**
+ * @brief Converts the specified UNIX path into a valid Windows path.
+ */
+static char *convert_unix_path(char *src)
+{
+    for (char *ptr = src; *ptr; ++ptr)
+        if (*ptr == '/')
+            *ptr = '\\';
+
+    return src;
+}
+
+/**
  * @brief Validates the specified directory entry for a plugin file.
  */
 static bool is_valid_plugin_file(WIN32_FIND_DATA *fs_entry)
