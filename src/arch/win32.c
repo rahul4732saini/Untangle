@@ -158,3 +158,24 @@ PluginsData *get_plugins(void)
 
     return &plugins;
 }
+
+/**
+ * @details Closes the plugin libraries and frees up heap memory.
+ */
+void clean(void)
+{
+    // Skips the clean process if it has already been done.
+    if (!handlers)
+        return;
+
+    // Closes all the dynamically loaded plugin libraries.
+    for (len_t i = 0; i < plugin_count; ++i)
+        FreeLibrary(handlers[i]);
+
+    free(handlers);
+    free(plugins.plugins);
+
+    // Resets the variables to their defaults to mark them as un-initialized.
+    handlers = NULL;
+    plugins.size = plugin_count = 0;
+}
