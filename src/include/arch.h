@@ -4,9 +4,9 @@
 #ifndef _ARCH_H
 #define _ARCH_H
 
-#include "structs.h"
+#include "shared.h"
 
-extern Domains *(**get_plugins(void))(void);
+extern PluginsData *get_plugins(void);
 extern void clean(void);
 
 #endif
