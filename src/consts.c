@@ -5,7 +5,7 @@
  */
 
 // Relative path to the plugin directory.
-const char *plugin_dir = "plugin";
+const char *plugin_dir = "plugin/";
 
 // Name of the variables declared by plugin libraries, used for
 // locating the associated symbols in the plugin.
