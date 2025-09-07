@@ -25,30 +25,30 @@ typedef struct
 {
     const char *name;
     const dtype_t *args;
-    len_t args_size;
+    const len_t args_size;
     const char **prompts;
-    len_t prompts_size;
-    Result *(*handler)(void *, ...);
+    const len_t prompts_size;
+    const Result *(*handler)(void *, ...);
 } Problem;
 
 typedef struct
 {
     const char *name;
-    Problem **problems;
-    len_t problems_size;
+    const Problem **problems;
+    const len_t problems_size;
 } Field;
 
 typedef struct
 {
     const char *name;
-    Field *fields;
-    len_t fields_size;
+    const Field **fields;
+    const len_t fields_size;
 } Domain;
 
 typedef struct
 {
-    Domain **domains;
-    len_t domains_size;
+    const Domain **domains;
+    const len_t domains_size;
 } Domains;
 
 #endif
