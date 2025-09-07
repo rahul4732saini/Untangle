@@ -7,8 +7,13 @@
 typedef struct
 {
     char *name;
-    Domains *(**functions)(void);
-    len_t size;
+    Domains *(*function)(void);
 } PluginData;
+
+typedef struct
+{
+    PluginData *plugins;
+    len_t size;
+} PluginsData;
 
 #endif
