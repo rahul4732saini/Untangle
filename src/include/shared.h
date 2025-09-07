@@ -9,7 +9,7 @@
 typedef struct
 {
     char *name;
-    Domains *(*function)(void);
+    Domains *domains;
     bool enabled;
 } PluginData;
 
