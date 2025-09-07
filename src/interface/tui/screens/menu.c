@@ -20,6 +20,6 @@ static void show_footer(Dimension *scr_dim)
     for (index_t i = 0; i < footers_len; ++i, ++row)
     {
         move(row, (scr_dim->width - strlen(footers[i])) / 2);
-        printw("%s", footers[i]);
+        addstr(footers[i]);
     }
 }
