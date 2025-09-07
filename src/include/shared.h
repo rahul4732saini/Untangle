@@ -1,6 +1,8 @@
 #ifndef _SHARED_H
 #define _SHARED_H
 
+#include <stdbool.h>
+
 #include "structs.h"
 #include "typedefs.h"
 
@@ -8,6 +10,7 @@ typedef struct
 {
     char *name;
     Domains *(*function)(void);
+    bool enabled;
 } PluginData;
 
 typedef struct
