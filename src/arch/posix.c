@@ -147,6 +147,7 @@ PluginsData *get_plugins(void)
         plugins.plugins[ctr++] = (PluginData){
             .name = *name,
             .function = *function,
+            .enabled = true,
         };
     }
 
