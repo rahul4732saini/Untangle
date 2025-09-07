@@ -174,7 +174,7 @@ void clean(void)
         dlclose(handlers[i]);
 
     free(handlers);
-    free(plugins.functions);
+    free(plugins.plugins);
 
     // Resets the variables to their defaults to mark them as un-initialized.
     handlers = NULL;
