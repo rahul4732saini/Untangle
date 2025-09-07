@@ -1,3 +1,9 @@
+/**
+ * @file consts.c
+ * @brief Defines constant variables providing assistance to the
+ * various functions defined within the project.
+ */
+
 // Relative path to the plugin directory.
 const char *plugin_dir = "plugin";
 
