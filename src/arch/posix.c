@@ -105,6 +105,7 @@ PluginsData *get_plugins(void)
     len_t file_cnt = get_plugin_count(dir_path);
     len_t dir_path_len = strlen(dir_path);
 
+    // Allocates memory for storing the library handlers and plugin data.
     handlers = malloc(file_cnt * sizeof(void *));
     plugins.plugins = (PluginData *)malloc(file_cnt * sizeof(PluginData));
 
@@ -131,12 +132,11 @@ PluginsData *get_plugins(void)
         if (!handler)
             continue;
 
-        // Allocates memory for storing the library handlers and plugin data.
-        Domains *(**function)(void) = (Domains * (**)(void)) dlsym(handler, plugin_domain_func);
+        Domains *domains = (Domains *)dlsym(handler, plugin_domains_var);
         char **name = (char **)dlsym(handler, plugin_name_var);
 
-        // Continues if the target function or variable was not found in the library.
-        if (!function || !name)
+        // Continues if the target variables couldn't be loaded from the library.
+        if (!domains || !name)
         {
             dlclose(handler);
             continue;
@@ -146,7 +146,7 @@ PluginsData *get_plugins(void)
         handlers[ctr] = handler;
         plugins.plugins[ctr++] = (PluginData){
             .name = *name,
-            .function = *function,
+            .domains = domains,
             .enabled = true,
         };
     }

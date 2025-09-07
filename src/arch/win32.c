@@ -107,6 +107,7 @@ PluginsData *get_plugins(void)
     char pattern[dir_path_len + 1];
     sprintf(pattern, "%s*", dir_path);
 
+    // Allocates memory for storing the library handlers and plugin data.
     handlers = (HMODULE *)malloc(file_cnt * sizeof(HMODULE));
     plugins.plugins = (PluginData *)malloc(file_cnt * sizeof(PluginData));
 
@@ -131,11 +132,11 @@ PluginsData *get_plugins(void)
         if (!lib)
             continue;
 
-        Domains *(**function)(void) = (Domains * (**)(void)) GetProcAddress(lib, plugin_domain_func);
+        Domains *domains = (Domains *)GetProcAddress(lib, plugin_domains_var);
         char **name = (char **)GetProcAddress(lib, plugin_name_var);
 
-        // Continues if the target function or variable was not found in the library.
-        if (!function || !name)
+        // Continues if the target variables couldn't be loaded from the library.
+        if (!domains || !name)
         {
             FreeLibrary(lib);
             continue;
@@ -145,7 +146,7 @@ PluginsData *get_plugins(void)
         handlers[ctr] = lib;
         plugins.plugins[ctr++] = (PluginData){
             .name = *name,
-            .function = *function,
+            .domains = domains,
             .enabled = true,
         };
 
