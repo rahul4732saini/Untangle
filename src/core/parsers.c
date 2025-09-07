@@ -1,3 +1,11 @@
+/**
+ * @file parsers.c
+ * @brief Defines parsers functions for supported data types.
+ *
+ * @details This file provides functions for parsing user input
+ * strings and converting them into strongly type values.
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
