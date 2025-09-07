@@ -17,3 +17,11 @@ void setup(void)
     curs_set(0);
     keypad(stdscr, TRUE);
 }
+
+/**
+ * @brief Fress the resources and exits the TUI environment.
+ */
+void clean(void)
+{
+    endwin();
+}
