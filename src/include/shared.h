@@ -6,8 +6,9 @@
 
 typedef struct
 {
+    char *name;
     Domains *(**functions)(void);
     len_t size;
-} PluginFunctions;
+} PluginData;
 
 #endif
