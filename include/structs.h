@@ -24,15 +24,12 @@ typedef struct
 typedef struct
 {
     const char *name;
-    Field *fields;
-    len_t fields_size;
-} Domain;
-
-typedef struct
-{
-    Domain **domains;
-    len_t domains_size;
-} Domains;
+    const dtype_t *args;
+    len_t args_size;
+    const char **prompts;
+    len_t prompts_size;
+    Result *(*handler)(void *, ...);
+} Problem;
 
 typedef struct
 {
@@ -44,11 +41,14 @@ typedef struct
 typedef struct
 {
     const char *name;
-    const dtype_t *args;
-    len_t args_size;
-    const char **prompts;
-    len_t prompts_size;
-    Result *(*handler)(void *, ...);
-} Problem;
+    Field *fields;
+    len_t fields_size;
+} Domain;
+
+typedef struct
+{
+    Domain **domains;
+    len_t domains_size;
+} Domains;
 
 #endif
