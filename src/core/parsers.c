@@ -17,7 +17,7 @@ void *(*parsers[])(char *) = {
     parse_string,
 };
 
-bool *parse_bool(char *src)
+static bool *parse_bool(char *src)
 {
     bool *result = (bool *)malloc(sizeof(bool));
 
@@ -39,7 +39,7 @@ bool *parse_bool(char *src)
     return NULL;
 }
 
-integer_t *parse_int(char *src)
+static integer_t *parse_int(char *src)
 {
     integer_t *result = (integer_t *)malloc(sizeof(integer_t));
     len_t ctr = 0;
@@ -55,7 +55,7 @@ integer_t *parse_int(char *src)
     return NULL;
 }
 
-double *parse_float(char *src)
+static double *parse_float(char *src)
 {
     double *result = (double *)malloc(sizeof(double));
     len_t ctr = 0;
@@ -71,7 +71,7 @@ double *parse_float(char *src)
     return NULL;
 }
 
-Number *parse_complex(char *src)
+static Number *parse_complex(char *src)
 {
     Number *result = (Number *)malloc(sizeof(Number));
     result->real = 0;
@@ -112,7 +112,7 @@ fail:
     return NULL;
 }
 
-Number *parse_numeric(char *src)
+static Number *parse_numeric(char *src)
 {
     Number *result = (Number *)malloc(sizeof(Number));
     result->imag = 0;
@@ -146,7 +146,7 @@ Number *parse_numeric(char *src)
     return result;
 }
 
-char *parse_string(char *src)
+static char *parse_string(char *src)
 {
     return src;
 }
