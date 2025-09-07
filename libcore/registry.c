@@ -43,12 +43,12 @@ const Field *fields_math_arr[] = {
     &fld_geometric_progression,
 };
 
-const len_t fields_mat_arr_len = 4;
+const len_t fields_math_arr_len = 4;
 
 const Domain dmn_math = {
     .name = "Mathematics",
     .fields = fields_math_arr,
-    .fields_size = 4,
+    .fields_size = fields_math_arr_len,
 };
 
 const Domain *domains_arr[] = {
