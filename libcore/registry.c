@@ -1,3 +1,8 @@
+/**
+ * @file registry.c
+ * @brief Defines and exports the data associated with this plugin.
+ */
+
 #if defined(_WIN32) || defined(_WIN64)
 #define EXPORT __declspec(dllexport)
 
