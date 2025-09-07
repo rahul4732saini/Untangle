@@ -38,7 +38,7 @@ static bool is_valid_plugin_file(struct dirent *entry)
     if (entry->d_type != DT_REG)
         return false;
 
-    char *match = strstr(entry, lib_file_suffix);
+    char *match = strstr(entry->d_name, lib_file_suffix);
 
     // Only returns true if a match was found and there are no
     // characters present ahead of the expected suffix.
