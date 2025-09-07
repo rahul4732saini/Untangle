@@ -9,16 +9,16 @@ typedef uint16_t span_t;
 
 typedef struct
 {
-    WINDOW *win;
-    Dimension *dim;
-} WinContext;
-
-typedef struct
-{
     span_t height;
     span_t width;
     pos_t start_y;
     pos_t start_x;
 } Dimension;
+
+typedef struct
+{
+    WINDOW *win;
+    Dimension *dim;
+} WinContext;
 
 #endif
