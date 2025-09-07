@@ -2,9 +2,9 @@
  * @file topics.c
  * @brief Defines structures to store topic-related data.
  *
- * @details This file comprises structures definitions to store all the
- * data associated with the domains, fields and problems supported by this
- * plugin library.
+ * @details This file comprises structures definitions to store the
+ * data associated with the domains, fields and problems supported by
+ * this plugin library.
  */
 
 #include "structs.h"
