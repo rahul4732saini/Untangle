@@ -23,7 +23,7 @@ static const len_t lib_file_suffix_len = 3;
 
 // Library open mode to load the symbols lazily and load them
 // locally to avoid any conflicts and also ensure performance.
-static const lib_open_mode = RTLD_LAZY | RTLD_LOCAL;
+static const int lib_open_mode = RTLD_LAZY | RTLD_LOCAL;
 
 static void **handlers = NULL;
 static PluginsData plugins;
