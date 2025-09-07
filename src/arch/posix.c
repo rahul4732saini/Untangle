@@ -26,7 +26,7 @@ static const len_t lib_file_suffix_len = 3;
 static const lib_open_mode = RTLD_LAZY | RTLD_LOCAL;
 
 static void **handlers = NULL;
-static PluginFunctions plugins;
+static PluginsData plugins;
 
 static len_t plugin_count;
 
@@ -93,7 +93,7 @@ static len_t get_plugin_count(char *path)
 /**
  * @brief Extracts the domains extracter functions from the plugin libraries.
  */
-Domains *(**get_plugins(void))(void)
+PluginsData *get_plugins(void)
 {
     // Avoid re-loading the libraries and extracting the functions if
     // already done.
@@ -106,7 +106,7 @@ Domains *(**get_plugins(void))(void)
     len_t dir_path_len = strlen(dir_path);
 
     handlers = malloc(file_cnt * sizeof(void *));
-    plugins.functions = (Domains * (**)(void)) malloc(file_cnt * sizeof(Domains * (*)(void)));
+    plugins.plugins = (PluginsData *)malloc(file_cnt * sizeof(PluginData));
 
     // Keeps track of the current index in the handlers and functions array.
     len_t ctr = 0;
@@ -131,18 +131,24 @@ Domains *(**get_plugins(void))(void)
         if (!handler)
             continue;
 
-        Domains *(**function)(void) = dlsym(handler, plugin_domain_func);
+        // Allocates memory for storing the library handlers and plugin data.
+        Domains *(**function)(void) = (Domains * (**)(void)) dlsym(handler, plugin_domain_func);
+        char **name = (char **)dlsym(handler, plugin_name_var);
 
-        // Continues if the target function was not found in the library.
-        if (!function)
+        // Continues if the target function or variable was not found
+        // in the library.
+        if (!function || !name)
         {
             dlclose(handler);
             continue;
         }
 
-        // Stores the handler and the function, and updates the counter.
+        // Stores the library handler and the plugin data.
         handlers[ctr] = handler;
-        plugins.functions[ctr++] = *function;
+        plugins.plugins[ctr++] = (PluginData){
+            .name = *name,
+            .function = *function,
+        };
     }
 
     // Saves the counter for future usage.
