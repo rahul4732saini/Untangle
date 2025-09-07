@@ -13,7 +13,7 @@
  * @param scr_dim Pointer to the Dimension struct comprising the
  * screen dimensions.
  */
-void show_footer(Dimension *scr_dim)
+static void show_footer(Dimension *scr_dim)
 {
     index_t row = scr_dim->height - footers_len - 1;
 
