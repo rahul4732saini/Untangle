@@ -9,4 +9,6 @@
 extern span_t title_bar_height;
 extern span_t main_menu_width;
 
+extern char *search_button_text;
+
 #endif
