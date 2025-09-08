@@ -60,3 +60,41 @@ void init_search_window(WinContext *wctx, Dimension *scr_dim)
 
     wrefresh(wctx->win);
 }
+
+/**
+ * @brief Displays the search box along with the specified text if not NULL.
+ */
+void show_search_window(WinContext *wctx, char *text, bool selected)
+{
+    WINDOW *win = wctx->win;
+    integer_t color = selected ? COLOR_DEFAULT : COLOR_DISABLED;
+
+    wattron(win, COLOR_PAIR(color));
+
+    // Clears the search box of any remaining characters.
+    wmove(win, 1, 1);
+    printw("%*s", search_box_width - 2, "");
+
+    wmove(win, 1, 1);
+
+    // Always prints the specified text is not NULL.
+    if (text)
+    {
+        len_t len = strlen(text);
+
+        // Only prints the last characters from the string that can
+        // fit in the search box if its length exceeds the limit.
+        if (len < search_box_width - 3)
+            waddstr(win, text);
+
+        waddstr(win, text + len - search_box_width + 3);
+    }
+
+    // Displays the placeholder when the box is not selected and there is
+    // no other text to display.
+    else if (!selected)
+        waddstr(win, search_box_placeholder);
+
+    wattroff(win, COLOR_PAIR(color));
+    wrefresh(win);
+}
