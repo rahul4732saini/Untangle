@@ -6,6 +6,7 @@
 // ncurses TUI color pair identifiers.
 #define COLOR_DEFAULT 0
 #define COLOR_SELECT 1
+#define COLOR_DISABLED 2
 
 // Extended ncurses color index
 #define COLOR_GREY 8
