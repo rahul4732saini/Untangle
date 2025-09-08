@@ -63,10 +63,11 @@ void init_main_menu(WinContext *wctx, Dimension *scr_dim)
     dim->start_x = (scr_dim->width - dim->width) / 2;
 
     wctx->win = init_window(dim);
+    box(wctx->win, 0, 0);
 
     // Draws the static content on the screen.
-    box(wctx->win, 0, 0);
     show_footer(scr_dim);
+    show_menu_heading(main_menu_title, dim->start_y, scr_dim);
     show_title_bar(main_menu_top_bar_title, scr_dim);
 
     wrefresh(wctx->win);
