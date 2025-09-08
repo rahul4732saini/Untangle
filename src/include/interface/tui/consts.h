@@ -9,6 +9,7 @@
 
 extern const span_t title_bar_height;
 extern const span_t main_menu_width;
+extern const span_t search_box_width;
 
 extern const char *go_back_button_text;
 
