@@ -37,4 +37,6 @@ void show_title_bar(char *heading, Dimension *scr_dim)
     move(0, 1);
     addnstr(heading, scr_dim->width - 5);
     addstr("...");
+
+    refresh();
 }
