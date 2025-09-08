@@ -55,3 +55,47 @@ void init_main_menu(WinContext *wctx, Dimension *scr_dim)
 
     wrefresh(wctx->win);
 }
+
+/**
+ * @brief Displays the main menu window on the TUI screen.
+ *
+ * @details Displays the main menu window with the menu items
+ * also highlighting the selected item marking the selection.
+ *
+ * @param wctx Pointer to the WinContext struct comprising the window data.
+ * @param select Index of the selected menu item.
+ */
+void show_main_menu(WinContext *wctx, index_t select)
+{
+    WINDOW *win = wctx->win;
+
+    // Left cutoff is stored as a 32-bit signed integer to meet
+    // padding variable requirements in variadic formatting.
+
+    span_t left_cutoff;
+    span_t length, width = main_menu_width - 2;
+
+    for (index_t i = 0; i < main_menu_items_len; ++i)
+    {
+        // Extracts the string length for cutoff calculation.
+        length = strlen(main_menu_items[i]);
+        left_cutoff = (width - length) / 2;
+
+        // Configures the current background and foreground
+        // color based on the index of the menu item.
+
+        if (i == select)
+            wattron(win, COLOR_PAIR(COLOR_SELECT));
+
+        wmove(win, i + 1, 1);
+
+        wprintw(win, "%*s", left_cutoff, "");
+        wprintw(win, "%s", main_menu_items[i]);
+        wprintw(win, "%*s", width - length - left_cutoff, "");
+
+        if (i == select)
+            wattroff(win, COLOR_PAIR(COLOR_SELECT));
+    }
+
+    wrefresh(win);
+}
