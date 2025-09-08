@@ -1,6 +1,9 @@
 #include "interface/tui/typedefs.h"
 
+// Heights of different components on the TUI screen.
 const span_t title_bar_height = 2;
+const span_t go_back_button_height = 1;
+const span_t search_box_height = 3;
 
 // The following window widths also include the side borders.
 const span_t main_menu_width = 24;
