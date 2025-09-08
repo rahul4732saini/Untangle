@@ -30,6 +30,8 @@ void show_go_back_button(bool selected)
 
 /**
  * @brief Draws the static content of the Domain Menu TUI screen.
+ * @param scr_dim Pointer to the Dimension struct comprising the
+ * screen dimensions.
  */
 void show_domain_menu_screen(Dimension *scr_dim)
 {
