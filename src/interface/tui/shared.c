@@ -5,6 +5,25 @@
 #include "interface/tui/typedefs.h"
 
 /**
+ * @brief Initializes and configures a new ncurses TUI window.
+ * @param dim Pointer to the Dimension struct comprising the window dimensions.
+ * @return Pointer to the newly created window.
+ */
+WINDOW *init_window(Dimension *dim)
+{
+    WINDOW *win = newwin(
+        dim->height,
+        dim->width,
+        dim->start_y,
+        dim->start_x);
+
+    keypad(win, TRUE);
+    refresh();
+
+    return win;
+}
+
+/**
  * @brief Displays the title bar with the specified heading at the
  * top of the screen.
  *
