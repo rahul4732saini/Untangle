@@ -7,6 +7,9 @@
 #define COLOR_DEFAULT 0
 #define COLOR_SELECT 1
 
+// Extended ncurses color index
+#define COLOR_GREY 8
+
 extern const span_t title_bar_height;
 extern const span_t main_menu_width;
 extern const span_t search_box_width;
