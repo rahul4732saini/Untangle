@@ -99,3 +99,23 @@ void show_search_window(WinContext *wctx, char *text, bool selected)
     wattroff(win, COLOR_PAIR(color));
     wrefresh(win);
 }
+
+/**
+ * @brief Initializes and configures the generic sub-menu window.
+ */
+void init_sub_menu_window(WinContext *wctx, Dimension *scr_dim)
+{
+    Dimension *dim = wctx->dim;
+
+    *dim = (Dimension){
+        .height = scr_dim->height - sub_menu_start_y + 1,
+        .width = sub_menu_width,
+        .start_y = sub_menu_start_y,
+        .start_x = (scr_dim->width - sub_menu_width) / 2,
+    };
+
+    wctx->win = init_window(dim);
+    box(wctx->win, 0, 0);
+
+    wrefresh(wctx->win);
+}
