@@ -30,15 +30,15 @@ void show_go_back_button(bool selected)
 }
 
 /**
- * @brief Draws the static content of the Domain Menu TUI screen.
+ * @brief Draws the static contents of the sub-menu TUI screen.
  * @param scr_dim Pointer to the Dimension struct comprising the
  * screen dimensions.
  */
-void show_domain_menu_screen(Dimension *scr_dim)
+void show_sub_menu_screen(char *title, Dimension *scr_dim)
 {
     clear();
 
-    show_title_bar(domain_menu_title, scr_dim);
+    show_title_bar(title, scr_dim);
     show_go_back_button(false);
 }
 
