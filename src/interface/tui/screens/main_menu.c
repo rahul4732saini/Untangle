@@ -59,7 +59,7 @@ void init_main_menu(WinContext *wctx, Dimension *scr_dim)
     dim->height = main_menu_items_len + 2;
     dim->width = main_menu_width;
 
-    dim->start_y = (scr_dim->height - dim->height) / 2;
+    dim->start_y = (scr_dim->height - dim->height + title_bar_height) / 2;
     dim->start_x = (scr_dim->width - dim->width) / 2;
 
     wctx->win = init_window(dim);
