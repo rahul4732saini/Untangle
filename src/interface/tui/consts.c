@@ -16,7 +16,7 @@ const char *search_box_placeholder = "Search...";
 // Starting coordinates of different components on the TUI screen.
 const pos_t go_back_button_start_y = title_bar_height;
 const pos_t go_back_button_start_x = 1;
-const pos_t search_box_start_y = go_back_button_start_y + 1;
+const pos_t search_box_start_y = go_back_button_start_y + go_back_button_height;
 const pos_t sub_menu_start_y = search_box_start_y + search_box_height;
 
 const char *domain_menu_title = "Select a Domain";
