@@ -1,5 +1,6 @@
-#include <ncurses.h>
+#include <string.h>
 #include <stdbool.h>
+#include <ncurses.h>
 
 #include "typedefs.h"
 
