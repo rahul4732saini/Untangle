@@ -31,7 +31,7 @@ WINDOW *init_window(Dimension *dim)
  * @param scr_dim Pointer to the Dimension struct comprising the
  * screen dimensions.
  */
-void show_title_bar(char *heading, Dimension *scr_dim)
+void show_title_bar(const char *heading, Dimension *scr_dim)
 {
     move(1, 0);
 
