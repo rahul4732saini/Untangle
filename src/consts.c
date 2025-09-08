@@ -32,3 +32,6 @@ const char *footers[] = {
 
 const len_t main_menu_items_len = 3;
 const len_t footers_len = 2;
+
+const char *main_menu_top_bar_title = "Untangle";
+const char *main_menu_title = "Main Menu";
