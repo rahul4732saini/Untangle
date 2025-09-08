@@ -22,4 +22,6 @@ static void show_footer(Dimension *scr_dim)
         move(row, (scr_dim->width - strlen(footers[i])) / 2);
         addstr(footers[i]);
     }
+
+    refresh();
 }
