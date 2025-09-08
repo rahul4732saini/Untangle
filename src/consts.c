@@ -20,7 +20,7 @@ const char *bool_true = "true";
 const char *bool_false = "false";
 
 const char *main_menu_items[] = {
-    "Start Solving",
+    "Solve Problems",
     "Extensions",
     "Quit",
 };
