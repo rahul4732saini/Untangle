@@ -50,7 +50,7 @@ void init_search_window(WinContext *wctx, Dimension *scr_dim)
     Dimension *dim = wctx->dim;
 
     *dim = (Dimension){
-        .height = 3,
+        .height = search_box_height,
         .width = search_box_width,
         .start_y = search_box_start_y,
         .start_x = (scr_dim->width - search_box_width) / 2,
@@ -73,22 +73,23 @@ void show_search_window(WinContext *wctx, char *text, bool selected)
     wattron(win, COLOR_PAIR(color));
 
     // Clears the search box of any remaining characters.
-    wmove(win, 1, 1);
-    printw("%*s", search_box_width - 2, "");
+    wmove(win, 1, search_box_padding + 1);
+    printw("%*s", search_box_width - search_box_padding * 2 - 2, "");
 
-    wmove(win, 1, 1);
+    wmove(win, 1, 2);
 
     // Always prints the specified text is not NULL.
     if (text)
     {
         len_t len = strlen(text);
 
-        // Only prints the last characters from the string that can
-        // fit in the search box if its length exceeds the limit.
-        if (len < search_box_width - 3)
+        if (len < search_box_width - search_box_padding * 2 - 3)
             waddstr(win, text);
 
-        waddstr(win, text + len - search_box_width + 3);
+        // Only prints the last characters from the string that can fit in the search
+        // box along with one additional character space for the cursor if its length
+        // exceeds the limit.
+        waddstr(win, text + len - search_box_width + search_box_padding * 2 + 3);
     }
 
     // Displays the placeholder when the box is not selected and there is
