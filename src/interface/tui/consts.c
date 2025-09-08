@@ -10,6 +10,8 @@ const span_t main_menu_width = 24;
 const span_t search_box_width = 50;
 const span_t sub_menu_width = 60;
 
+const span_t search_box_padding = 1;
+
 const char *go_back_button_text = "Go Back [Esc]";
 const char *search_box_placeholder = "Search...";
 
