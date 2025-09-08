@@ -1,7 +1,10 @@
 #include "interface/tui/typedefs.h"
 
 const span_t title_bar_height = 2;
-const span_t main_menu_width = 24; // Also includes the window's side borders.
+
+// The following window widths also include the side borders.
+const span_t main_menu_width = 24;
+const span_t search_box_width = 60;
 
 const char *go_back_button_text = "Go Back [Esc]";
 
