@@ -5,6 +5,6 @@
 #include "interface/tui/typedefs.h"
 
 extern WINDOW *init_window(Dimension *dim);
-extern void show_title_bar(char *heading, Dimension *scr_dim);
+extern void show_title_bar(const char *heading, Dimension *scr_dim);
 
 #endif
