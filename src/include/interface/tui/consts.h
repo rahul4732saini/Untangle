@@ -6,9 +6,9 @@
 // Identifier of the color pair for displaying selection.
 #define COLOR_SELECT 1
 
-extern span_t title_bar_height;
-extern span_t main_menu_width;
+extern const span_t title_bar_height;
+extern const span_t main_menu_width;
 
-extern char *search_button_text;
+extern const char *search_button_text;
 
 #endif
