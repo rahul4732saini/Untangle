@@ -7,7 +7,7 @@ const span_t search_box_height = 3;
 
 // The following window widths also include the side borders.
 const span_t main_menu_width = 24;
-const span_t search_box_width = 60;
+const span_t search_box_width = 50;
 const span_t sub_menu_width = 60;
 
 const char *go_back_button_text = "Go Back [Esc]";
