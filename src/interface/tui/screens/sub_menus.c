@@ -40,3 +40,23 @@ void show_domain_menu_screen(Dimension *scr_dim)
     show_title_bar(domain_menu_title, scr_dim);
     show_go_back_button(false);
 }
+
+/**
+ * @brief Initializes and configures the search box window.
+ */
+void init_search_window(WinContext *wctx, Dimension *scr_dim)
+{
+    Dimension *dim = wctx->dim;
+
+    *dim = (Dimension){
+        .height = 3,
+        .width = search_box_width,
+        .start_y = search_box_start_y,
+        .start_x = (scr_dim->width - search_box_width) / 2,
+    };
+
+    wctx->win = init_window(dim);
+    box(wctx->win, 0, 0);
+
+    wrefresh(wctx->win);
+}
