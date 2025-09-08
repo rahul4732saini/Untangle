@@ -7,6 +7,7 @@ const span_t main_menu_width = 24;
 const span_t search_box_width = 60;
 
 const char *go_back_button_text = "Go Back [Esc]";
+const char *search_box_placeholder = "Search...";
 
 // Starting coordinates of different components on the TUI screen.
 const pos_t go_back_button_start_y = title_bar_height;
