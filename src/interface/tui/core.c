@@ -13,6 +13,7 @@ void setup(void)
     start_color();
 
     // Color pairs initialization.
+    init_pair(COLOR_DISABLED, COLOR_GREY, COLOR_BLACK);
     init_pair(COLOR_SELECT, COLOR_BLACK, COLOR_WHITE);
 
     // Reduced ESC key delay to 100ms to avoid performance issues.
