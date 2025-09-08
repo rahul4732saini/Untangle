@@ -3,7 +3,8 @@
 
 #include "interface/tui/typedefs.h"
 
-// Identifier of the color pair for displaying selection.
+// ncurses TUI color pair identifiers.
+#define COLOR_DEFAULT 0
 #define COLOR_SELECT 1
 
 extern const span_t title_bar_height;
