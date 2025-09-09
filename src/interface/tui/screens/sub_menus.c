@@ -3,6 +3,7 @@
 #include <ncurses.h>
 
 #include "typedefs.h"
+#include "structs.h"
 
 #include "interface/tui/consts.h"
 #include "interface/tui/typedefs.h"
