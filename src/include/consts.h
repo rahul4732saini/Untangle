@@ -3,6 +3,8 @@
 
 #include "typedefs.h"
 
+#define ASCII_LF 10
+
 extern const char *plugin_dir;
 extern const char *plugin_domains_var;
 extern const char *plugin_name_var;
