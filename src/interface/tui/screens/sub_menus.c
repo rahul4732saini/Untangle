@@ -120,3 +120,39 @@ void init_sub_menu_window(WinContext *wctx, Dimension *scr_dim)
 
     wrefresh(wctx->win);
 }
+
+/**
+ * @brief Extracts the name of the domain at the specified index in
+ * the given domains.
+ *
+ * @param domains Pointer to the Domains struct comprising the domains.
+ * @param inx Index of the domain whose name is to be extracted.
+ */
+static const char *get_domain_name(void *domains, index_t inx)
+{
+    return ((Domains *)domains)->domains[inx]->name;
+}
+
+/**
+ * @brief Extracts the name of the field at the specified index in
+ * the given domain.
+ *
+ * @param domains Pointer to the Domain struct comprising the fields.
+ * @param inx Index of the field whose name is to be extracted.
+ */
+static const char *get_field_name(void *domain, index_t inx)
+{
+    return ((Domain *)domain)->fields[inx]->name;
+}
+
+/**
+ * @brief Extracts the name of the problem at the specified index in
+ * the given field.
+ *
+ * @param domains Pointer to the Field struct comprising the problems.
+ * @param inx Index of the problem whose name is to be extracted.
+ */
+static const char *get_problem_name(void *field, index_t inx)
+{
+    return ((Field *)field)->problems[inx]->name;
+}
