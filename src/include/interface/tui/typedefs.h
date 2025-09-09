@@ -4,6 +4,7 @@
 #include <ncurses.h>
 #include <stdint.h>
 
+typedef uint16_t input_t;
 typedef uint16_t pos_t;
 typedef uint16_t span_t;
 
