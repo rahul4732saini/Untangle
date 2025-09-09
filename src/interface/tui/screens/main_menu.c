@@ -1,3 +1,9 @@
+/**
+ * @file main_menu.c
+ * @brief Defines functions for initializing and displaying the main menu screen
+ * and window.
+ */
+
 #include <ncurses.h>
 #include <string.h>
 
