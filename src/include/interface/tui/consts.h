@@ -1,6 +1,7 @@
 #ifndef _TUI_CONSTS_H
 #define _TUI_CONSTS_H
 
+#include "typedefs.h"
 #include "interface/tui/typedefs.h"
 
 // ncurses TUI color pair identifiers.
@@ -14,6 +15,8 @@
 // ASCII code associated with the corresponding keyboard keys.
 #define ASCII_LF 10
 #define ASCII_ESC 27
+
+extern const len_t screen_stack_size;
 
 extern const span_t title_bar_height;
 extern const span_t go_back_button_height;
