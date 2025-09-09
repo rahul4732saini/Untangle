@@ -1,5 +1,17 @@
 #include <ncurses.h>
+
+#include "typedefs.h"
+#include "shared.h"
+
+#include "interface/tui/typedefs.h"
 #include "interface/tui/consts.h"
+#include "interface/tui/handlers.h"
+
+// Pointers to TUI screen handler functions associated with each screen identifier.
+static const handler_t (*handlers[])(Dimension *, void **) = {
+    handle_main_menu,
+    handle_domain_menu,
+};
 
 /**
  * @brief Initializes and configures the standard TUI screen.
