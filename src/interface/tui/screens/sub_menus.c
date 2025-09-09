@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <ncurses.h>
 
+#include "consts.h"
 #include "typedefs.h"
 #include "structs.h"
 #include "shared.h"
