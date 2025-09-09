@@ -34,7 +34,7 @@ void show_go_back_button(bool selected)
  * @param scr_dim Pointer to the Dimension struct comprising the
  * screen dimensions.
  */
-void show_sub_menu_screen(char *title, Dimension *scr_dim)
+void show_sub_menu_screen(const char *title, Dimension *scr_dim)
 {
     clear();
 
