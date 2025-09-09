@@ -1,4 +1,9 @@
+#include "typedefs.h"
 #include "interface/tui/typedefs.h"
+
+// Size of the stack to store the data associated with each TUI
+// screen interface.
+const len_t screen_stack_size = 30;
 
 // Heights of different components on the TUI screen.
 const span_t title_bar_height = 2;
