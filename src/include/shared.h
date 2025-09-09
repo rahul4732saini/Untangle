@@ -19,4 +19,10 @@ typedef struct
     len_t size;
 } PluginsData;
 
+typedef struct
+{
+    PluginsData *plugins;
+    Domains *domains;
+} SessionData;
+
 #endif
