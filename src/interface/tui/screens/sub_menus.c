@@ -4,6 +4,7 @@
 
 #include "typedefs.h"
 #include "structs.h"
+#include "shared.h"
 
 #include "interface/tui/consts.h"
 #include "interface/tui/typedefs.h"
@@ -229,4 +230,51 @@ void show_field_menu_window(WinContext *wctx, Domain *domain, index_t select)
 void show_problem_menu_window(WinContext *wctx, Field *field, index_t select)
 {
     show_sub_menu_window(wctx, field, field->problems_size, select, get_problem_name);
+}
+
+/**
+ * @brief Displays the extensions sub-menu window.
+ *
+ * @details This function displays the extensions sub-menu window, along with the name
+ * of the extension, with also highlighting enabled plugins with character markers.
+ *
+ * @param wctx Pointer to the WinContext struct comprising the window data.
+ * @param plugins Pointer to the PluginsData struct comprising the plugins.
+ * @param select Index of the plugin entry to be highlighted in the sub-menu.
+ */
+void show_extension_menu_window(WinContext *wctx, PluginsData *plugins, index_t select)
+{
+    WINDOW *win = wctx->win;
+
+    // Excludes the vertical border of the window to get the option limit.
+    len_t option_limit = wctx->dim->height - 2;
+
+    // Excludes the side borders along with a padding of 1 character to get
+    // the horizontal limit.
+    len_t row_limit = wctx->dim->width - 4;
+
+    // Excludes the length of the enable marker to get the limit for the plugin name.
+    len_t name_limit = row_limit - 2;
+
+    for (index_t i = 0; i < option_limit && i < plugins->size; ++i)
+    {
+
+        if (i == select)
+            wattron(win, COLOR_PAIR(COLOR_SELECT));
+
+        // Starts with a padding of 2 characters in the row (1 for border, 1 for padding).
+        wmove(win, i + 1, 2);
+        wprintw(win, "%c ", plugins->plugins[i].enabled ? '@' : ' ');
+
+        waddnstr(win, plugins->plugins[i].name, name_limit);
+
+        if (i == select)
+        {
+            // Fills up the remaining space in the row highlighting the selection.
+            wprintw(win, "%*s", row_limit - getcurx(win) + 2, "");
+            wattroff(win, COLOR_PAIR(COLOR_SELECT));
+        }
+    }
+
+    wrefresh(win);
 }
