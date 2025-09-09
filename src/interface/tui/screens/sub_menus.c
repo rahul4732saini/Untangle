@@ -205,3 +205,27 @@ static void show_sub_menu_window(
 
     wrefresh(win);
 }
+
+/**
+ * @brief Displays the domain sub-menu window.
+ */
+void show_domain_menu_window(WinContext *wctx, Domains *domains, index_t select)
+{
+    show_sub_menu_window(wctx, domains, domains->domains_size, select, get_domain_name);
+}
+
+/**
+ * @brief Displays the field sub-menu window.
+ */
+void show_field_menu_window(WinContext *wctx, Domain *domain, index_t select)
+{
+    show_sub_menu_window(wctx, domain, domain->fields_size, select, get_field_name);
+}
+
+/**
+ * @brief Displays the problem sub-menu window.
+ */
+void show_problem_menu_window(WinContext *wctx, Field *field, index_t select)
+{
+    show_sub_menu_window(wctx, field, field->problems_size, select, get_problem_name);
+}
