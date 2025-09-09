@@ -1,6 +1,7 @@
 #ifndef _TUI_HANDLERS_H
 #define _TUI_HANDLERS_H
 
+// TUI screen handler identifiers
 #define HDL_PREV -1
 #define HDL_MAIN_MENU 0
 #define HDL_EXTENSION_MENU 4
