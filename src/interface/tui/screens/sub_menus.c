@@ -156,3 +156,52 @@ static const char *get_problem_name(void *field, index_t inx)
 {
     return ((Field *)field)->problems[inx]->name;
 }
+
+/**
+ * @brief Displays the sub-menu window along with the specified data.
+ *
+ * @details Displays the sub-menu window along with the data accepted as a generic
+ * pointer, to allow different types of data to be specified and displayed, each entry
+ * of which is accessed using the specified getter/resolver function.
+ *
+ * @param wctx Pointer to the WinContext struct comprising the window data.
+ * @param data Generic pointer to the data to be displayed in the sub-menu.
+ * @param data_size Size of the data array.
+ * @param select Index of the data entry to be highlighted in the sub-menu.
+ * @param getter Pointer to the function to get the name associated with each data entry.
+ */
+static void show_sub_menu_window(
+    WinContext *wctx,
+    void *data,
+    len_t data_size,
+    index_t select,
+    const char *(*getter)(void *, index_t))
+{
+    WINDOW *win = wctx->win;
+
+    // Excludes the vertical border of the window to get the option limit.
+    len_t option_limit = wctx->dim->height - 2;
+
+    // Excludes the side borders along with a padding of 1 character to get
+    // the horizontal limit.
+    len_t row_limit = wctx->dim->width - 4;
+
+    for (index_t i = 0; i < option_limit && i < data_size; ++i)
+    {
+        if (i == select)
+            wattron(win, COLOR_PAIR(COLOR_SELECT));
+
+        // Starts with a padding of 2 characters in the row (1 for border, 1 for padding).
+        wmove(win, i + 1, 2);
+        waddnstr(win, getter(data, i), row_limit);
+
+        if (i == select)
+        {
+            // Fills up the remaining space in the row highlighting the selection.
+            wprintw(win, "%*s", row_limit - getcurx(win) + 2, "");
+            wattroff(win, COLOR_PAIR(COLOR_SELECT));
+        }
+    }
+
+    wrefresh(win);
+}
