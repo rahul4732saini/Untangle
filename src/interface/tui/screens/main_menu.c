@@ -29,22 +29,6 @@ static void show_footer(Dimension *scr_dim)
 }
 
 /**
- * @brief Displays the specified menu heading on top on the
- * associated menu window.
- *
- * @param heading Text to be displayed on top on the menu window.
- * @param menu_start_y Vertical starting position of the menu.
- * @param scr_dim Pointer to the Dimension struct comprising the
- * screen dimensions.
- */
-static inline void show_menu_heading(
-    const char *heading, size_t menu_start_y, Dimension *scr_dim)
-{
-    move(menu_start_y - 1, (scr_dim->width - strlen(heading)) / 2);
-    addstr(heading);
-}
-
-/**
  * @brief Initializes the main menu window and displays its static
  * contents on the TUI screen.
  *
