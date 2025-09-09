@@ -13,5 +13,6 @@
 #define HDL_PROBLEM_MENU 3
 
 handler_t handle_main_menu(Dimension *scr_dim, void **data);
+handler_t handle_domain_menu(Dimension *scr_dim, void **data);
 
 #endif
