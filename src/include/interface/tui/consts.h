@@ -11,6 +11,10 @@
 // Extended ncurses color index
 #define COLOR_GREY 8
 
+// ASCII code associated with the corresponding keyboard keys.
+#define ASCII_LF 10
+#define ASCII_ESC 27
+
 extern const span_t title_bar_height;
 extern const span_t go_back_button_height;
 extern const span_t search_box_height;
