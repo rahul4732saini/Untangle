@@ -33,5 +33,16 @@ const char *footers[] = {
 const len_t main_menu_items_len = 3;
 const len_t footers_len = 2;
 
+// Text to be displayed in the title bar for different menu screens.
 const char *main_menu_title = "Untangle";
+const char *domain_menu_title = "Domain Menu";
+const char *field_menu_title = "Field Menu";
+const char *problem_menu_title = "Problem Menu";
+const char *extension_menu_title = "Extensions";
+
+// Exclusive window title for the main menu.
 const char *main_menu_window_title = "Main Menu";
+
+// Placeholder to be displayed in the search box within the application
+// interface if no other text is to be displayed.
+const char *search_box_placeholder = "Search...";
