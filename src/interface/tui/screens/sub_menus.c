@@ -79,13 +79,12 @@ void show_search_window(WinContext *wctx, char *text, bool selected)
     WINDOW *win = wctx->win;
     integer_t color = selected ? COLOR_DEFAULT : COLOR_DISABLED;
 
-    wattron(win, COLOR_PAIR(color));
-
     // Clears the search box of any remaining characters.
     wmove(win, 1, search_box_padding + 1);
-    printw("%*s", search_box_width - search_box_padding * 2 - 2, "");
+    wprintw(win, "%*s", search_box_width - search_box_padding * 2 - 2, "");
 
-    wmove(win, 1, 2);
+    wattron(win, COLOR_PAIR(color));
+    wmove(win, 1, search_box_padding + 1);
 
     // Always prints the specified text is not NULL.
     if (text)
