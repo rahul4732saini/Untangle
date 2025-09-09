@@ -57,6 +57,9 @@ handler_t handle_main_menu(Dimension *scr_dim, void **data)
 
         case KEY_RESIZE:
             return HDL_SELF;
+
+        case ASCII_ESC:
+            return HDL_PREV;
         }
 
         // Updates the selection and displays the menu.
