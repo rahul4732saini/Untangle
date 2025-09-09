@@ -8,12 +8,14 @@
 #include "consts.h"
 #include "shared.h"
 #include "typedefs.h"
+#include "structs.h"
 
 #include "interface/tui/typedefs.h"
 #include "interface/tui/consts.h"
 #include "interface/tui/handlers.h"
 
 #include "interface/tui/screens/main_menu.h"
+#include "interface/tui/screens/sub_menus.h"
 
 // Screen handlers associated with the main menu options.
 static const handler_t main_menu_handlers[] = {
@@ -77,4 +79,92 @@ handler_t handle_main_menu(Dimension *scr_dim, void **data)
         *data = sdata->plugins;
 
     return main_menu_handlers[select];
+}
+
+/**
+ * @brief Handles the domain menu interface.
+ *
+ * @details Displays the domain menu window and handles user input for
+ * triggering the actions associated with them within the menu screen.
+ */
+handler_t handle_domain_menu(Dimension *scr_dim, void **data)
+{
+    // Creates a separate copy to be used for passing data to display functions, to
+    // only provide them with the domains available in the current segment while also
+    // avoiding mutations in the original data.
+    Domains *domains = (Domains *)*data, domains_cpy;
+
+    WinContext win_ctxs[2];
+    Dimension dims[2];
+
+    win_ctxs[0].dim = dims, win_ctxs[1].dim = dims + 1;
+
+    // The title is limited to the screen width as exceeding that would
+    // only hide it visually.
+    char title[scr_dim->width];
+    snprintf(title, scr_dim->width, "%s > %s", main_menu_window_title, domain_menu_title);
+
+    // Sets up the sub-menu screen and initializes the windows.
+    setup_sub_menu_screen(title, scr_dim);
+    init_sub_menu_window(win_ctxs, scr_dim);
+    init_search_window(win_ctxs + 1, scr_dim);
+
+    // Temporarily displays an empty search box initially.
+    show_search_window(win_ctxs + 1, NULL, false);
+
+    // Excludes the vertical window borders to get the option count limit.
+    len_t option_limit = win_ctxs[0].dim->height - 2;
+
+    input_t input = 0;
+    index_t segment = 0, offset = 0;
+
+    // Displays the domain menu window until the RETURN key is pressed
+    // signifying an option selection.
+    do
+    {
+        switch (input)
+        {
+        case KEY_UP:
+            if (offset)
+                --offset;
+
+            else if (segment)
+                --segment;
+
+            break;
+
+        case KEY_DOWN:
+            if (segment + offset == domains->domains_size - 1)
+                ;
+
+            else if (offset != option_limit - 1)
+                ++offset;
+
+            else
+                ++segment;
+
+            break;
+
+        case KEY_RESIZE:
+            return HDL_SELF;
+
+        case ASCII_ESC:
+            return HDL_PREV;
+        };
+
+        // Updates the copy based on the current segment to correctly display
+        // the domain menu items.
+        domains_cpy = (Domains){
+            .domains = domains->domains + segment,
+            .domains_size = domains->domains_size - segment,
+        };
+
+        show_domain_menu_window(win_ctxs, &domains_cpy, offset);
+
+    } while ((input = getch()) != ASCII_LF);
+
+    // Access the selected domain directly using the offset from the copy struct.
+    *data = domains_cpy.domains[offset];
+
+    return HDL_FIELD_MENU;
 }
