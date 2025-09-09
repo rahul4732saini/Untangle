@@ -1,3 +1,9 @@
+/**
+ * @file sub_menus.c
+ * @brief Defines functions for initializing and displaying the sub-menu
+ * screens and windows.
+ */
+
 #include <string.h>
 #include <stdbool.h>
 #include <ncurses.h>
