@@ -39,11 +39,11 @@ void show_go_back_button(bool selected)
 }
 
 /**
- * @brief Draws the static contents of the sub-menu TUI screen.
+ * @brief Clears the TUI screen and draws the static contents of the sub-menu.
  * @param scr_dim Pointer to the Dimension struct comprising the
  * screen dimensions.
  */
-void show_sub_menu_screen(const char *title, Dimension *scr_dim)
+void setup_sub_menu_screen(const char *title, Dimension *scr_dim)
 {
     clear();
 
