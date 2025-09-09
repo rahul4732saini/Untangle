@@ -17,6 +17,12 @@ extern const len_t main_menu_items_len;
 extern const len_t footers_len;
 
 extern const char *main_menu_title;
+extern const char *domain_menu_title;
+extern const char *field_menu_title;
+extern const char *problem_menu_title;
+extern const char *extention_menu_title;
+
 extern const char *main_menu_window_title;
+extern const char *search_box_placeholder;
 
 #endif
