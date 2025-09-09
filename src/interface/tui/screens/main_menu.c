@@ -99,8 +99,7 @@ void show_main_menu(WinContext *wctx, index_t select)
 
         wmove(win, i + 1, 1);
 
-        wprintw(win, "%*s", left_cutoff, "");
-        wprintw(win, "%s", main_menu_items[i]);
+        wprintw(win, "%*s", left_cutoff + length, main_menu_items[i]);
         wprintw(win, "%*s", width - length - left_cutoff, "");
 
         if (i == select)
