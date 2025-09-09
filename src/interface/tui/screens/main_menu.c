@@ -35,6 +35,21 @@ static void show_footer(Dimension *scr_dim)
 }
 
 /**
+ * @brief Clears the TUI screen and draws the static contents of the main menu.
+ * @param scr_dim Pointer to the Dimension struct comprising the
+ * screen dimensions.
+ */
+void setup_main_menu_screen(Dimension *scr_dim)
+{
+    clear();
+
+    show_title_bar(main_menu_title, scr_dim);
+    show_footer(scr_dim);
+
+    refresh();
+}
+
+/**
  * @brief Initializes the main menu window and displays its static
  * contents on the TUI screen.
  *
