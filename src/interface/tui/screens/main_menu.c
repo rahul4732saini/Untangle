@@ -50,8 +50,8 @@ void setup_main_menu_screen(Dimension *scr_dim)
 }
 
 /**
- * @brief Initializes the main menu window and displays its static
- * contents on the TUI screen.
+ * @brief Initializes the main menu window and displays the static
+ * contents associated with it.
  *
  * @param wctx Pointer to the WinContext struct comprising the window data.
  * @param scr_dim Pointer to the Dimension struct comprising the
@@ -69,10 +69,6 @@ void init_main_menu(WinContext *wctx, Dimension *scr_dim)
 
     wctx->win = init_window(dim);
     box(wctx->win, 0, 0);
-
-    // Draws the static content on the screen.
-    show_footer(scr_dim);
-    show_title_bar(main_menu_title, scr_dim);
 
     // Displays the main menu window title just on top of it.
     move(dim->start_y - 1, (scr_dim->width - strlen(main_menu_window_title)) / 2);
