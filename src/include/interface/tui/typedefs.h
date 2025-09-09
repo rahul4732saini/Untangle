@@ -7,6 +7,7 @@
 typedef uint16_t input_t;
 typedef uint16_t pos_t;
 typedef uint16_t span_t;
+typedef uint8_t handler_t;
 
 typedef struct
 {
