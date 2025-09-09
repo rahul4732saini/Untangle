@@ -204,12 +204,12 @@ static void show_sub_menu_window(
         wmove(win, i + 1, 2);
         waddnstr(win, getter(data, i), row_limit);
 
+        // Fills up the remaining spaces to remove any remaining characters,
+        // and also highlight the area if selected.
+        wprintw(win, "%*s", row_limit - getcurx(win) + 2, "");
+
         if (i == select)
-        {
-            // Fills up the remaining space in the row highlighting the selection.
-            wprintw(win, "%*s", row_limit - getcurx(win) + 2, "");
             wattroff(win, COLOR_PAIR(COLOR_SELECT));
-        }
     }
 
     wrefresh(win);
