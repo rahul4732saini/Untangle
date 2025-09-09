@@ -36,8 +36,9 @@ handler_t handle_main_menu(Dimension *scr_dim, void **data)
 
     WinContext wctx;
     Dimension dim;
-
     wctx.dim = &dim;
+
+    setup_main_menu_screen(scr_dim);
     init_main_menu(&wctx, scr_dim);
 
     input_t input = 0;
