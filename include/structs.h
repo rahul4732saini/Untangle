@@ -47,7 +47,7 @@ typedef struct
 
 typedef struct
 {
-    const Domain **domains;
+    Domain **domains;
     len_t domains_size;
 } Domains;
 
