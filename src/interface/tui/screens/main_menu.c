@@ -67,8 +67,8 @@ void init_main_menu(WinContext *wctx, Dimension *scr_dim)
 
     // Draws the static content on the screen.
     show_footer(scr_dim);
-    show_menu_heading(main_menu_title, dim->start_y, scr_dim);
-    show_title_bar(main_menu_top_bar_title, scr_dim);
+    show_menu_heading(main_menu_window_title, dim->start_y, scr_dim);
+    show_title_bar(main_menu_title, scr_dim);
 
     wrefresh(wctx->win);
 }
