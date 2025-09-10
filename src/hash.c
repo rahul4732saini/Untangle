@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
 
@@ -44,7 +45,7 @@ HashTable *init_hash_table(len_t size, char *(*key_extractor)(void *))
     HashTable *table = (HashTable *)malloc(sizeof(HashTable));
 
     *table = (HashTable){
-        .buckets = (BucketNode *)calloc(size, sizeof(BucketNode)),
+        .buckets = (BucketNode **)calloc(size, sizeof(BucketNode *)),
         .size = size,
         .key_extractor = key_extractor,
     };
