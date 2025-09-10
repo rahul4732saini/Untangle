@@ -35,20 +35,20 @@ typedef struct
 {
     const char *name;
     const Problem **problems;
-    len_t problems_size;
+    len_t size;
 } Field;
 
 typedef struct
 {
     const char *name;
     const Field **fields;
-    len_t fields_size;
+    len_t size;
 } Domain;
 
 typedef struct
 {
     Domain **domains;
-    len_t domains_size;
+    len_t size;
 } Domains;
 
 #endif
