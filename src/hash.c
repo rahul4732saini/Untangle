@@ -8,6 +8,12 @@ typedef struct bucket_node
     struct bucket_node *next;
 } BucketNode;
 
+typedef struct
+{
+    BucketNode **buckets;
+    len_t size;
+    char *(*key_extractor)(void *);
+} HashTable;
 
 /**
  * @brief Extracts the hash of the string using DJB2 hashing algorithm.
