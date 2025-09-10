@@ -5,6 +5,11 @@
 // screen interface.
 const len_t screen_stack_size = 30;
 
+// Warning message to be displayed on the screen if the screen
+// dimensions are too small to render the interface.
+const char *scr_dim_warning = "Current screen dimensions are unsupported.\n\
+Please resize the window to a larger size to continue.";
+
 // Heights of different components on the TUI screen.
 const span_t title_bar_height = 2;
 const span_t go_back_button_height = 1;
