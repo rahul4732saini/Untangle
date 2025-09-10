@@ -164,3 +164,86 @@ handler_t handle_domain_menu(Dimension *scr_dim, void **data)
 
     return HDL_FIELD_MENU;
 }
+
+/**
+ * @brief Handles the field menu interface.
+ *
+ * @details Displays the field menu window and handles user input for
+ * triggering the actions associated with them within the menu screen.
+ */
+handler_t handle_field_menu(Dimension *scr_dim, void **data)
+{
+    // Creates a separate copy to be used for passing data to display functions, to
+    // only provide them with the fields available in the current segment while also
+    // avoiding mutations in the original data.
+    Domain *domain = (Domain *)*data, domain_cpy;
+
+    WinContext win_ctxs[2];
+    Dimension dims[2];
+
+    win_ctxs[0].dim = dims, win_ctxs[1].dim = dims + 1;
+
+    // The title is limited to the screen width as exceeding that would
+    // only hide it visually.
+    char title[scr_dim->width];
+    snprintf(title, scr_dim->width, ".. > %s > %s", domain->name, field_menu_title);
+
+    // Sets up the sub-menu screen and initializes the windows.
+    setup_sub_menu_screen(title, win_ctxs, scr_dim);
+
+    // Excludes the vertical window borders to get the option count limit.
+    len_t option_limit = win_ctxs[0].dim->height - 2;
+
+    input_t input = 0;
+    index_t segment = 0, offset = 0;
+
+    // Displays the field menu window until the RETURN key is pressed
+    // signifying an option selection.
+    do
+    {
+        switch (input)
+        {
+        case KEY_UP:
+            if (offset)
+                --offset;
+
+            else if (segment)
+                --segment;
+
+            break;
+
+        case KEY_DOWN:
+            if (segment + offset == domain->fields_size - 1)
+                ;
+
+            else if (offset != option_limit - 1)
+                ++offset;
+
+            else
+                ++segment;
+
+            break;
+
+        case KEY_RESIZE:
+            return HDL_SELF;
+
+        case ASCII_ESC:
+            return HDL_PREV;
+        };
+
+        // Updates the copy based on the current segment to correctly display
+        // the field menu items.
+        domain_cpy = (Domain){
+            .fields = domain->fields + segment,
+            .fields_size = domain->fields_size - segment,
+        };
+
+        show_field_menu_window(win_ctxs, &domain_cpy, offset);
+
+    } while ((input = getch()) != ASCII_LF);
+
+    // Access the selected domain directly using the offset from the copy struct.
+    *data = domain_cpy.fields[offset];
+
+    return HDL_FIELD_MENU;
+}
