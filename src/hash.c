@@ -2,6 +2,13 @@
 
 typedef uint32_t hash_t;
 
+typedef struct bucket_node
+{
+    void *data;
+    struct bucket_node *next;
+} BucketNode;
+
+
 /**
  * @brief Extracts the hash of the string using DJB2 hashing algorithm.
  * @param src Pointer to the source stirng.
