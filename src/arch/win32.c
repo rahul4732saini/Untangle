@@ -164,7 +164,7 @@ PluginsData *get_plugins(void)
 /**
  * @details Closes the plugin libraries and frees up heap memory.
  */
-void clean(void)
+void clean_plugins(void)
 {
     // Skips the clean process if it has already been done.
     if (!handlers)
