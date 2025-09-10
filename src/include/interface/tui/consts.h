@@ -17,8 +17,8 @@
 #define ASCII_ESC 27
 
 // Minimum screen dimensions to be supported to run in the TUI environment.
-#define MIN_HEIGHT 80
-#define MIN_WIDTH 25
+#define MIN_HEIGHT 25
+#define MIN_WIDTH 80
 
 extern const len_t screen_stack_size;
 extern const char *scr_dim_warning;
