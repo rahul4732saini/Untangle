@@ -1,4 +1,8 @@
 #include <stdint.h>
+#include <string.h>
+
+#include "typedefs.h"
+#include "shared.h"
 
 typedef uint32_t hash_t;
 
@@ -28,4 +32,22 @@ static hash_t get_hash(char *src)
         result = (result << 5) + result + *src;
 
     return result;
+}
+
+/**
+ * @brief Initializes a hash table based on the given specifications.
+ * @param size Number of buckets to be present in the hash table.
+ * @param key_extractor Function to extract the key from table data.
+ */
+HashTable *init_hash_table(len_t size, char *(*key_extractor)(void *))
+{
+    HashTable *table = (HashTable *)malloc(sizeof(HashTable));
+
+    *table = (HashTable){
+        .buckets = (BucketNode *)calloc(size, sizeof(BucketNode)),
+        .size = size,
+        .key_extractor = key_extractor,
+    };
+
+    return table;
 }
