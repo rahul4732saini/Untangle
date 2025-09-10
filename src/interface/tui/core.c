@@ -90,27 +90,7 @@ void mainloop(SessionData *sdata)
 
     while (true)
     {
-        // Refreshes the screen dimensions on each iteration to acknowledge
-        // any changes made in them while handling or switching.
-        scr_dim = (Dimension){
-            .height = getmaxy(stdscr),
-            .width = getmaxx(stdscr),
-        };
-
-        // Displays a warning message while the screen dimensions are unsupported.
-        if (scr_dim.height < MIN_HEIGHT || scr_dim.width < MIN_WIDTH)
-        {
-            clear();
-
-            mvaddstr(0, 0, scr_dim_warning);
-            refresh();
-
-            // Waits until the screen dimensions are changed.
-            while (getch() != KEY_RESIZE)
-                ;
-
-            continue;
-        }
+        handle_screen_dimensions(&scr_dim);
 
         // Copies the current interface data to the next frame, and passes a pointer to
         // that to avoid any changes in the original while also automatically placing the
