@@ -51,3 +51,25 @@ HashTable *init_hash_table(len_t size, char *(*key_extractor)(void *))
 
     return table;
 }
+
+/**
+ * @brief Frees the resources allocated for the hash table.
+ * @param table Pointer the HashTable struct comprising the hash
+ * table data.
+ */
+void free_hash_table(HashTable *table)
+{
+    // Frees the resources allocated for each bucket node.
+    for (len_t i = 0; i < table->size; ++i)
+    {
+        while (table->buckets[i])
+        {
+            BucketNode *bucket = table->buckets[i];
+            table->buckets[i] = table->buckets[i]->next;
+            free(bucket);
+        }
+    }
+
+    free(table->buckets);
+    free(table);
+}
