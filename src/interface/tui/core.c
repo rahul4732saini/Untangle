@@ -44,6 +44,33 @@ static void clean(void)
 }
 
 /**
+ * @brief Updates the screen dimensions and waits if they are un-supported.
+ * @param scr_dim Pointer to the Dimension struct comprising the
+ * screen dimensions.
+ */
+static void handle_screen_dimensions(Dimension *scr_dim)
+{
+    // Updates the struct with the new screen dimensions.
+    *scr_dim = (Dimension){
+        .height = getmaxy(stdscr),
+        .width = getmaxx(stdscr),
+    };
+
+    // Displays a warning message if the screen dimensions are unsupported.
+    if (scr_dim->height < MIN_HEIGHT || scr_dim->width < MIN_WIDTH)
+    {
+        clear();
+
+        mvaddstr(0, 0, scr_dim_warning);
+        refresh();
+
+        // Waits until the screen dimensions are changed.
+        while (getch() != KEY_RESIZE)
+            ;
+    }
+}
+
+/**
  * @brief Sets up and handles the TUI environment.
  */
 void mainloop(SessionData *sdata)
