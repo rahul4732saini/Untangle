@@ -245,5 +245,5 @@ handler_t handle_field_menu(Dimension *scr_dim, void **data)
     // Access the selected domain directly using the offset from the copy struct.
     *data = domain_cpy.fields[offset];
 
-    return HDL_FIELD_MENU;
+    return HDL_PROBLEM_MENU;
 }
