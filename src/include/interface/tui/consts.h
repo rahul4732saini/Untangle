@@ -21,6 +21,7 @@
 #define MIN_WIDTH 25
 
 extern const len_t screen_stack_size;
+extern const char *scr_dim_warning;
 
 extern const span_t title_bar_height;
 extern const span_t go_back_button_height;
