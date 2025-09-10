@@ -53,6 +53,28 @@ HashTable *init_hash_table(len_t size, char *(*key_extractor)(void *))
 }
 
 /**
+ * @brief Stores the given data into the hash table.
+ * @param table Pointer to the HashTable struct comprising the
+ * hash table data.
+ * @param data Pointer to the data to be stored in the table.
+ */
+void add_table_data(HashTable *table, void *data)
+{
+    BucketNode *bucket = (BucketNode *)malloc(sizeof(BucketNode));
+    bucket->data = data;
+
+    hash_t hash = get_hash(table->key_extractor(data));
+    index_t pos = hash % table->size;
+
+    *bucket = (BucketNode){
+        .data = data,
+        .next = table->buckets[pos],
+    };
+
+    table->buckets[pos] = bucket;
+}
+
+/**
  * @brief Frees the resources allocated for the hash table.
  * @param table Pointer the HashTable struct comprising the hash
  * table data.
