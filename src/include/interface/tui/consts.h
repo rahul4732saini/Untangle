@@ -16,6 +16,10 @@
 #define ASCII_LF 10
 #define ASCII_ESC 27
 
+// Minimum screen dimensions to be supported to run in the TUI environment.
+#define MIN_HEIGHT 80
+#define MIN_WIDTH 25
+
 extern const len_t screen_stack_size;
 
 extern const span_t title_bar_height;
