@@ -20,7 +20,7 @@ extern const char *main_menu_title;
 extern const char *domain_menu_title;
 extern const char *field_menu_title;
 extern const char *problem_menu_title;
-extern const char *extention_menu_title;
+extern const char *extension_menu_title;
 
 extern const char *main_menu_window_title;
 extern const char *search_box_placeholder;
