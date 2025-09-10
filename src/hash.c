@@ -75,6 +75,31 @@ void add_table_data(HashTable *table, void *data)
 }
 
 /**
+ * @details Extracts the data from the hash table by matching the keys.
+ * @param Pointer to the HashTable struct comprising the hash table
+ * data.
+ * @param key The string whose hash will be used for finding the data.
+ * @return A pointer to the data is returned if found, or NULL to
+ * indicate failure in lookup.
+ */
+void *get_table_data(HashTable *table, char *key)
+{
+    hash_t hash = get_hash(key);
+    index_t pos = hash % table->size;
+
+    for (
+        BucketNode *bucket = table->buckets[pos];
+        bucket;
+        bucket = bucket->next)
+    {
+        if (!strcmp(key, table->key_extractor(bucket->data)))
+            return bucket->data;
+    }
+
+    return NULL;
+}
+
+/**
  * @brief Frees the resources allocated for the hash table.
  * @param table Pointer the HashTable struct comprising the hash
  * table data.
