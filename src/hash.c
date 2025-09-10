@@ -5,21 +5,6 @@
 #include "typedefs.h"
 #include "shared.h"
 
-typedef uint32_t hash_t;
-
-typedef struct bucket_node
-{
-    void *data;
-    struct bucket_node *next;
-} BucketNode;
-
-typedef struct
-{
-    BucketNode **buckets;
-    len_t size;
-    char *(*key_extractor)(void *);
-} HashTable;
-
 /**
  * @brief Extracts the hash of the string using DJB2 hashing algorithm.
  * @param src Pointer to the source stirng.
