@@ -186,7 +186,7 @@ handler_t handle_field_menu(Dimension *scr_dim, void **data)
     // The title is limited to the screen width as exceeding that would
     // only hide it visually.
     char title[scr_dim->width];
-    snprintf(title, scr_dim->width, ".. > %s > %s", domain->name, field_menu_title);
+    snprintf(title, scr_dim->width, "... > %s > %s", domain->name, field_menu_title);
 
     // Sets up the sub-menu screen and initializes the windows.
     setup_sub_menu_screen(title, win_ctxs, scr_dim);
