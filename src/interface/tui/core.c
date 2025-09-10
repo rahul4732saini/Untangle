@@ -16,7 +16,7 @@ static const handler_t (*handlers[])(Dimension *, void **) = {
 /**
  * @brief Initializes and configures the standard TUI screen.
  */
-void setup(void)
+static void setup(void)
 {
     initscr();
 
@@ -38,7 +38,7 @@ void setup(void)
 /**
  * @brief Fress the resources and exits the TUI environment.
  */
-void clean(void)
+static void clean(void)
 {
     endwin();
 }
