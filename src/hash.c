@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <string.h>
 
+#include "hash.h"
 #include "typedefs.h"
 #include "shared.h"
 
@@ -46,6 +47,9 @@ HashTable *init_hash_table(len_t size, char *(*key_extractor)(void *))
  */
 void add_table_data(HashTable *table, void *data)
 {
+    if (get_table_data(table, table->key_extractor(data)))
+        return;
+
     BucketNode *bucket = (BucketNode *)malloc(sizeof(BucketNode));
     bucket->data = data;
 
