@@ -106,12 +106,7 @@ handler_t handle_domain_menu(Dimension *scr_dim, void **data)
     snprintf(title, scr_dim->width, "%s > %s", main_menu_window_title, domain_menu_title);
 
     // Sets up the sub-menu screen and initializes the windows.
-    setup_sub_menu_screen(title, scr_dim);
-    init_sub_menu_window(win_ctxs, scr_dim);
-    init_search_window(win_ctxs + 1, scr_dim);
-
-    // Temporarily displays an empty search box initially.
-    show_search_window(win_ctxs + 1, NULL, false);
+    setup_sub_menu_screen(title, win_ctxs, scr_dim);
 
     // Excludes the vertical window borders to get the option count limit.
     len_t option_limit = win_ctxs[0].dim->height - 2;
