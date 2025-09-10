@@ -7,6 +7,6 @@
 #include "shared.h"
 
 extern PluginsData *get_plugins(void);
-extern void clean(void);
+extern void clean_plugins(void);
 
 #endif
