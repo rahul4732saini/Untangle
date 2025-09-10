@@ -39,19 +39,6 @@ void show_go_back_button(bool selected)
 }
 
 /**
- * @brief Clears the TUI screen and draws the static contents of the sub-menu.
- * @param scr_dim Pointer to the Dimension struct comprising the
- * screen dimensions.
- */
-void setup_sub_menu_screen(const char *title, Dimension *scr_dim)
-{
-    clear();
-
-    show_title_bar(title, scr_dim);
-    show_go_back_button(false);
-}
-
-/**
  * @brief Initializes and configures the search box window.
  */
 void init_search_window(WinContext *wctx, Dimension *scr_dim)
@@ -127,6 +114,25 @@ void init_sub_menu_window(WinContext *wctx, Dimension *scr_dim)
     box(wctx->win, 0, 0);
 
     wrefresh(wctx->win);
+}
+
+/**
+ * @brief Clears the TUI screen and initializes the static components of the sub-menu.
+ * @param scr_dim Pointer to the Dimension struct comprising the
+ * screen dimensions.
+ */
+void setup_sub_menu_screen(const char *title, WinContext *contexts, Dimension *scr_dim)
+{
+    clear();
+
+    show_title_bar(title, scr_dim);
+    show_go_back_button(false);
+
+    init_sub_menu_window(contexts, scr_dim);
+    init_search_window(contexts + 1, scr_dim);
+
+    // Temporarily displays an empty search box initially.
+    show_search_window(contexts + 1, NULL, false);
 }
 
 /**
