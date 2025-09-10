@@ -6,6 +6,21 @@
 #include "structs.h"
 #include "typedefs.h"
 
+typedef uint32_t hash_t;
+
+typedef struct bucket_node
+{
+    void *data;
+    struct bucket_node *next;
+} BucketNode;
+
+typedef struct
+{
+    BucketNode **buckets;
+    len_t size;
+    char *(*key_extractor)(void *);
+} HashTable;
+
 typedef struct
 {
     char *name;
