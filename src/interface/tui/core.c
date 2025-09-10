@@ -70,6 +70,21 @@ void mainloop(SessionData *sdata)
             .width = getmaxx(stdscr),
         };
 
+        // Displays a warning message while the screen dimensions are unsupported.
+        if (scr_dim.height < MIN_HEIGHT || scr_dim.width < MIN_WIDTH)
+        {
+            clear();
+
+            mvaddstr(0, 0, scr_dim_warning);
+            refresh();
+
+            // Waits until the screen dimensions are changed.
+            while (getch() != KEY_RESIZE)
+                ;
+
+            continue;
+        }
+
         // Copies the current interface data to the next frame, and passes a pointer to
         // that to avoid any changes in the original while also automatically placing the
         // next interface data onto the stack.
