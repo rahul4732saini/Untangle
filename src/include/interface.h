@@ -1,7 +1,8 @@
 #ifndef _INTERFACE_H
 #define _INTERFACE_H
 
-void setup(void);
-void clean(void);
+#include "shared.h"
+
+void mainloop(SessionData *sdata);
 
 #endif
