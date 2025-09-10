@@ -42,3 +42,55 @@ void clean(void)
 {
     endwin();
 }
+
+/**
+ * @brief Sets up and handles the TUI environment.
+ */
+void mainloop(SessionData *sdata)
+{
+    setup();
+
+    Dimension scr_dim;
+    handler_t handle_stack[screen_stack_size];
+    void *data_stack[screen_stack_size];
+
+    index_t len = 0;  // Length of the stacks
+    handler_t handle; // Temporarily stores the identifier return by the handler.
+
+    // Registers main-menu data onto the stack for execution.
+    handle_stack[len] = HDL_MAIN_MENU;
+    data_stack[len++] = sdata;
+
+    while (true)
+    {
+        // Refreshes the screen dimensions on each iteration to acknowledge
+        // any changes made in them while handling or switching.
+        scr_dim = (Dimension){
+            .height = getmaxy(stdscr),
+            .width = getmaxx(stdscr),
+        };
+
+        // Copies the current interface data to the next frame, and passes a pointer to
+        // that to avoid any changes in the original while also automatically placing the
+        // next interface data onto the stack.
+        data_stack[len] = data_stack[len - 1];
+        handle = handlers[handle_stack[len - 1]](&scr_dim, data_stack + len);
+
+        if (handle == HDL_SELF)
+            continue;
+
+        else if (handle == HDL_PREV)
+        {
+            // Exits if there are no more interface entries on the stack.
+            if (len == 1)
+                break;
+
+            --len;
+            continue;
+        }
+
+        handle_stack[len++] = handle;
+    }
+
+    clean();
+}
