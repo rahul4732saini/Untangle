@@ -215,10 +215,10 @@ void toggle_plugin(PluginData *plugin)
  * @brief Fress the memory allocated for the domain tree and
  * the plugins.
  */
-void clean_session_data(SessionData *sdata)
+void clean_session_data(void)
 {
     clean_domain_tree();
     clean_plugins();
 
-    free(sdata->domains);
+    free(sdata.domains);
 }
