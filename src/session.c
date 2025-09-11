@@ -134,3 +134,34 @@ void merge_fields(Domain *dest, Domain *src)
         merge_problems(field, src->fields[i]);
     }
 }
+
+/**
+ * @brief Merges the domains into a single Domains struct.
+ */
+void merge_domains(Domains *dest, Domains *src)
+{
+    HashTable *table = init_hash_table(30, get_domain_name);
+
+    // Stores the destinations domains in the hash table.
+    for (index_t i = 0; i < dest->size; ++i)
+        add_table_data(table, dest->domains[i]);
+
+    for (index_t i = 0; i < src->size; ++i)
+    {
+        Domain *domain = get_table_data(table, src->domains[i]->name);
+
+        // Allocates space for a new domain if not already existing in the
+        // destination structure.
+        if (!domain)
+        {
+            dest->domains = (Domain **)realloc(dest->domains, (dest->size + 1) * sizeof(Domain *));
+            dest->domains[dest->size] = (Domain *)calloc(1, sizeof(Domain));
+            dest->domains[dest->size]->name = src->domains[i]->name;
+
+            domain = dest->domains[dest->size];
+            ++dest->size;
+        }
+
+        merge_fields(domain, src->domains[i]);
+    }
+}
