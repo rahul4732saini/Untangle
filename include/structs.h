@@ -23,25 +23,25 @@ typedef struct
 
 typedef struct
 {
-    const char *name;
-    const dtype_t *args;
+    char *name;
+    dtype_t *args;
     len_t args_size;
-    const char **prompts;
+    char **prompts;
     len_t prompts_size;
-    const Result *(*handler)(void *, ...);
+    Result *(*handler)(void *, ...);
 } Problem;
 
 typedef struct
 {
-    const char *name;
-    const Problem **problems;
+    char *name;
+    Problem **problems;
     len_t size;
 } Field;
 
 typedef struct
 {
-    const char *name;
-    const Field **fields;
+    char *name;
+    Field **fields;
     len_t size;
 } Domain;
 
