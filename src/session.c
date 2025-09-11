@@ -71,7 +71,8 @@ void clean_domain_tree(void)
 }
 
 /**
- * @brief Merges problems into a single Field struct.
+ * @brief Merges problems into a single Field struct and drops an duplicate
+ * problems found within the fields.
  */
 void merge_problems(Field *dest, Field *src)
 {
