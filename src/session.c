@@ -35,3 +35,23 @@ static char *get_problem_name(void *data)
 {
     return ((Problem *)data)->name;
 }
+
+/**
+ * @brief Fress the memory allocated for storing fields
+ * and their associated problems.
+ *
+ * @param domain Pointer to the domain struct comprising
+ * domain-related data.
+ */
+void clean_field_tree(Domain *domain)
+{
+    for (len_t i = 0; i < domain->size; ++i)
+    {
+        Field *field = domain->fields[i];
+
+        for (len_t i = 0; i < field->size; ++i)
+            free(field->problems[i]);
+
+        free(field);
+    }
+}
