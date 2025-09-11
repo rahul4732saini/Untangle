@@ -19,6 +19,9 @@ const char *plugin_name_var = "plugin_name";
 const char *bool_true = "true";
 const char *bool_false = "false";
 
+// Default bucket count in the hash table for storing data.
+const len_t default_hash_table_size = 30;
+
 const char *main_menu_items[] = {
     "Solve Problems",
     "Extensions",
