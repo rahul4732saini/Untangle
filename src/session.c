@@ -205,3 +205,15 @@ void toggle_plugin(PluginData *plugin)
     plugin->enabled = !plugin->enabled;
     build_domain_tree();
 }
+
+/**
+ * @brief Fress the memory allocated for the domain tree and
+ * the plugins.
+ */
+void clean_session_data(SessionData *sdata)
+{
+    clean_domain_tree();
+    clean_plugins();
+
+    free(sdata->domains);
+}
