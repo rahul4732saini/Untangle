@@ -13,6 +13,7 @@ static const handler_t (*handlers[])(Dimension *, void **) = {
     handle_domain_menu,
     handle_field_menu,
     handle_problem_menu,
+    handle_extension_menu,
 };
 
 /**
