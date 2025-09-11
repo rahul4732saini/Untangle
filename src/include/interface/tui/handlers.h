@@ -17,5 +17,6 @@ handler_t handle_main_menu(Dimension *scr_dim, void **data);
 handler_t handle_domain_menu(Dimension *scr_dim, void **data);
 handler_t handle_field_menu(Dimension *scr_dim, void **data);
 handler_t handle_problem_menu(Dimension *scr_dim, void **data);
+handler_t handle_extension_menu(Dimension *src_dim, void **data);
 
 #endif
