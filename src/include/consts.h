@@ -10,6 +10,8 @@ extern const char *plugin_name_var;
 extern const char *bool_true;
 extern const char *bool_false;
 
+extern const len_t default_hash_table_size;
+
 extern const char *main_menu_items[];
 extern const char *footers[];
 
