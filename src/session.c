@@ -44,7 +44,7 @@ static char *get_problem_name(void *data)
  * @param domain Pointer to the domain struct comprising
  * domain-related data.
  */
-void clean_field_tree(Domain *domain)
+static void clean_field_tree(Domain *domain)
 {
     for (len_t i = 0; i < domain->size; ++i)
     {
@@ -61,7 +61,7 @@ void clean_field_tree(Domain *domain)
  * @brief Frees the memory allocated for the domains stored within
  * the SessionData struct.
  */
-void clean_domain_tree(void)
+static void clean_domain_tree(void)
 {
     for (len_t i = 0; i < sdata.domains->size; ++i)
     {
@@ -74,7 +74,7 @@ void clean_domain_tree(void)
  * @brief Merges problems into a single Field struct and drops an duplicate
  * problems found within the fields.
  */
-void merge_problems(Field *dest, Field *src)
+static void merge_problems(Field *dest, Field *src)
 {
     HashTable *table = init_hash_table(default_hash_table_size, get_domain_name);
 
@@ -105,7 +105,7 @@ void merge_problems(Field *dest, Field *src)
  * @brief Merges fields into a single Domain struct while also handling
  * conflicts.
  */
-void merge_fields(Domain *dest, Domain *src)
+static void merge_fields(Domain *dest, Domain *src)
 {
     HashTable *table = init_hash_table(default_hash_table_size, get_domain_name);
 
@@ -138,7 +138,7 @@ void merge_fields(Domain *dest, Domain *src)
 /**
  * @brief Merges the domains into a single Domains struct.
  */
-void merge_domains(Domains *dest, Domains *src)
+static void merge_domains(Domains *dest, Domains *src)
 {
     HashTable *table = init_hash_table(30, get_domain_name);
 
@@ -170,7 +170,7 @@ void merge_domains(Domains *dest, Domains *src)
  * @brief Extracts the domains from the stored plugins and builds
  * a unified domain tree comprising all data associated with them.
  */
-void build_domain_tree(void)
+static void build_domain_tree(void)
 {
     // Merges the domains present within the stored plugins into a
     // single struct.
