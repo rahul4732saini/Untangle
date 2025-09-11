@@ -177,3 +177,21 @@ void build_domain_tree(void)
     for (index_t i = 0; i < sdata.plugins->size; ++i)
         merge_domains(sdata.domains, sdata.plugins->plugins[i].domains);
 }
+
+/**
+ * @brief Builds up the session data.
+ */
+SessionData *get_session_data(void)
+{
+    if (sdata.domains && sdata.plugins)
+        return &sdata;
+
+    // Allocates space for the domains and extracts the plugins.
+    sdata = (SessionData){
+        .domains = (Domains *)calloc(1, sizeof(Domains)),
+        .plugins = get_plugins(),
+    };
+
+    build_domain_tree();
+    return &sdata;
+}
