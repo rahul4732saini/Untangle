@@ -14,7 +14,37 @@
 #include "structs.h"
 
 // Name of the plugin to be displayed in the application interface.
-EXPORT const char *plugin_name = "Dummy Plugin";
+EXPORT const char *plugin_name = "Core Plugin";
+
+Problem pbl_matrix_add = {
+    .name = "Matrix Addition",
+};
+
+Problem pbl_matrix_sub = {
+    .name = "Matrix Subtraction",
+};
+
+Problem pbl_matrix_mul = {
+    .name = "Matrix Multiplication",
+};
+
+Problem pbl_matrix_determinant = {
+    .name = "Determinant calculation",
+};
+
+Problem pbl_matrix_inverse = {
+    .name = "Inverse Calculation",
+};
+
+Problem *problems_matrix_arr[] = {
+    &pbl_matrix_add,
+    &pbl_matrix_sub,
+    &pbl_matrix_mul,
+    &pbl_matrix_determinant,
+    &pbl_matrix_inverse,
+};
+
+len_t problems_matrix_arr_len = 5;
 
 Field fld_basic_algebra = {
     .name = "Elementary Algebra",
@@ -23,7 +53,8 @@ Field fld_basic_algebra = {
 
 Field fld_matrix_manipulation = {
     .name = "Matrix Manipulation",
-    .size = 0,
+    .problems = problems_matrix_arr,
+    .size = 5,
 };
 
 Field fld_arithmetic_progression = {
