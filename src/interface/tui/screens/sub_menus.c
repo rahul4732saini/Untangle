@@ -276,16 +276,16 @@ void show_extension_menu_window(WinContext *wctx, PluginsData *plugins, index_t 
 
         // Starts with a padding of 2 characters in the row (1 for border, 1 for padding).
         wmove(win, i + 1, 2);
-        wprintw(win, "%c ", plugins->plugins[i].enabled ? '@' : ' ');
 
+        wprintw(win, "%c ", plugins->plugins[i].enabled ? '@' : ' ');
         waddnstr(win, plugins->plugins[i].name, name_limit);
 
+        // Fills up the remaining spaces to remove any remaining characters,
+        // and also highlight the area if selected.
+        wprintw(win, "%*s", row_limit - getcurx(win) + 2, "");
+
         if (i == select)
-        {
-            // Fills up the remaining space in the row highlighting the selection.
-            wprintw(win, "%*s", row_limit - getcurx(win) + 2, "");
             wattroff(win, COLOR_PAIR(COLOR_SELECT));
-        }
     }
 
     wrefresh(win);
