@@ -14,29 +14,29 @@
 #include "structs.h"
 
 // Name of the plugin to be displayed in the application interface.
-EXPORT const char *plugin_name = "Core Plugin";
+EXPORT const char *plugin_name = "Dummy Plugin";
 
-const Field fld_basic_algebra = {
+Field fld_basic_algebra = {
     .name = "Elementary Algebra",
     .size = 0,
 };
 
-const Field fld_matrix_manipulation = {
+Field fld_matrix_manipulation = {
     .name = "Matrix Manipulation",
     .size = 0,
 };
 
-const Field fld_arithmetic_progression = {
+Field fld_arithmetic_progression = {
     .name = "Arithmetic Progressions",
     .size = 0,
 };
 
-const Field fld_geometric_progression = {
+Field fld_geometric_progression = {
     .name = "Geometric Progressions",
     .size = 0,
 };
 
-const Field *fields_math_arr[] = {
+Field *fields_math_arr[] = {
     &fld_basic_algebra,
     &fld_matrix_manipulation,
     &fld_arithmetic_progression,
@@ -45,13 +45,13 @@ const Field *fields_math_arr[] = {
 
 const len_t fields_math_arr_len = 4;
 
-const Domain dmn_math = {
+Domain dmn_math = {
     .name = "Mathematics",
     .fields = fields_math_arr,
     .size = fields_math_arr_len,
 };
 
-const Domain *domains_arr[] = {
+Domain *domains_arr[] = {
     &dmn_math,
 };
 
