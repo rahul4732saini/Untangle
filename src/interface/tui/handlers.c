@@ -160,6 +160,9 @@ handler_t handle_domain_menu(Dimension *scr_dim, void **data)
 
     } while ((input = getch()) != ASCII_LF);
 
+    if (!domains->size)
+        return HDL_SELF;
+
     // Access the selected domain directly using the offset from the copy struct.
     *data = domains_cpy.domains[offset];
 
@@ -243,6 +246,9 @@ handler_t handle_field_menu(Dimension *scr_dim, void **data)
 
     } while ((input = getch()) != ASCII_LF);
 
+    if (!domain->size)
+        return HDL_SELF;
+
     // Access the selected domain directly using the offset from the copy struct.
     *data = domain_cpy.fields[offset];
 
@@ -325,6 +331,9 @@ handler_t handle_problem_menu(Dimension *scr_dim, void **data)
         show_problem_menu_window(win_ctxs, &field_cpy, offset);
 
     } while ((input = getch()) != ASCII_LF);
+
+    if (!field->size)
+        return HDL_SELF;
 
     // Access the selected problem directly using the offset from the copy struct.
     *data = field_cpy.problems[offset];
