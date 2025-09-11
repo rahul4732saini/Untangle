@@ -172,6 +172,9 @@ static void merge_domains(Domains *dest, Domains *src)
  */
 static void build_domain_tree(void)
 {
+    if (sdata.domains->size)
+        clean_domain_tree();
+
     // Merges the domains present within the stored plugins into a
     // single struct.
     for (index_t i = 0; i < sdata.plugins->size; ++i)
