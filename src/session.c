@@ -68,6 +68,8 @@ static void clean_domain_tree(void)
         clean_field_tree(sdata.domains->domains[i]);
         free(sdata.domains->domains[i]);
     }
+
+    sdata.domains->size = 0; // Resets the domains count.
 }
 
 /**
