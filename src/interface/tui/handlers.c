@@ -9,6 +9,7 @@
 #include "shared.h"
 #include "typedefs.h"
 #include "structs.h"
+#include "session.h"
 
 #include "interface/tui/typedefs.h"
 #include "interface/tui/consts.h"
@@ -394,7 +395,7 @@ handler_t handle_extension_menu(Dimension *scr_dim, void **data)
             return HDL_SELF;
 
         case ASCII_LF:
-            plugins_cpy.plugins[offset].enabled = !plugins_cpy.plugins[offset].enabled;
+            toggle_plugin(&plugins_cpy.plugins[offset]);
         };
 
         // Updates the copy based on the current segment to correctly display
