@@ -175,7 +175,12 @@ void build_domain_tree(void)
     // Merges the domains present within the stored plugins into a
     // single struct.
     for (index_t i = 0; i < sdata.plugins->size; ++i)
+    {
+        if (!sdata.plugins->plugins[i].enabled)
+            continue;
+
         merge_domains(sdata.domains, sdata.plugins->plugins[i].domains);
+    }
 }
 
 /**
