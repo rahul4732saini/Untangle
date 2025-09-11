@@ -195,3 +195,13 @@ SessionData *get_session_data(void)
     build_domain_tree();
     return &sdata;
 }
+
+/**
+ * @brief Toggles the current availability of the plugin to mark
+ * it enabled or disabled.
+ */
+void toggle_plugin(PluginData *plugin)
+{
+    plugin->enabled = !plugin->enabled;
+    build_domain_tree();
+}
