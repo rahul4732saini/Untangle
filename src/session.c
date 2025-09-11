@@ -100,3 +100,37 @@ void merge_problems(Field *dest, Field *src)
         ++dest->size;
     }
 }
+
+/**
+ * @brief Merges fields into a single Domain struct while also handling
+ * conflicts.
+ */
+void merge_fields(Domain *dest, Domain *src)
+{
+    HashTable *table = init_hash_table(default_hash_table_size, get_domain_name);
+
+    // Stores the destinations fields in the hash table.
+    for (index_t i = 0; i < dest->size; ++i)
+        add_table_data(table, dest->fields[i]);
+
+    // Merges fields present in the source struct into the destination struct.
+    for (index_t i = 0; i < src->size; ++i)
+    {
+        Field *field = get_table_data(table, src->fields[i]->name);
+
+        // Allocates space for a new field if not already existing in the
+        // destination structure.
+        if (!field)
+        {
+            dest->fields = (Field **)realloc(dest->fields, (dest->size + 1) * sizeof(Field *));
+            dest->fields[dest->size] = (Field *)calloc(1, sizeof(Field));
+            dest->fields[dest->size]->name = src->fields[i]->name;
+
+            field = dest->fields[dest->size];
+            ++dest->size;
+        }
+
+        // Merges the problems present within the structures.
+        merge_problems(field, src->fields[i]);
+    }
+}
