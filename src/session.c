@@ -55,3 +55,16 @@ void clean_field_tree(Domain *domain)
         free(field);
     }
 }
+
+/**
+ * @brief Frees the memory allocated for the domains stored within
+ * the SessionData struct.
+ */
+void clean_domain_tree(void)
+{
+    for (len_t i = 0; i < sdata.domains->size; ++i)
+    {
+        clean_field_tree(sdata.domains->domains[i]);
+        free(sdata.domains->domains[i]);
+    }
+}
