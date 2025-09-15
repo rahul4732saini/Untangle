@@ -139,7 +139,7 @@ PluginsData *get_plugins(void)
 
         // Extracts and saves the absolute path to the plugin library to avoid
         // loading a library from the global environment if the name conflicts.
-        char buff[dir_path_len + strlen(entry->d_name)];
+        char buff[dir_path_len + strlen(entry->d_name) + 1];
         strcpy(buff, dir_path);
         strcat(buff, entry->d_name);
 
