@@ -31,6 +31,19 @@ static PluginsData plugins;
 static len_t plugin_count;
 
 /**
+ * @brief Verifies whether the path exists and points to a valid directory.
+ */
+static bool verify_directory(char *path)
+{
+    struct stat dir_stat;
+
+    if (!stat(path, &dir_stat))
+        return false;
+
+    return S_ISDIR(dir_stat.st_mode);
+}
+
+/**
  * @brief Validates the specified directory entry for a plugin file.
  */
 static bool is_valid_plugin_file(struct dirent *entry)
