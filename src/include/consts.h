@@ -7,6 +7,8 @@ extern const char *plugin_dir;
 extern const char *plugin_domains_var;
 extern const char *plugin_name_var;
 
+extern const len_t max_plugin_name_len;
+
 extern const char *bool_true;
 extern const char *bool_false;
 
