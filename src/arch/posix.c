@@ -37,11 +37,7 @@ static len_t plugin_count;
 static bool verify_directory(char *path)
 {
     struct stat dir_stat;
-
-    if (!stat(path, &dir_stat))
-        return false;
-
-    return S_ISDIR(dir_stat.st_mode);
+    return !stat(path, &dir_stat) && S_ISDIR(dir_stat.st_mode);
 }
 
 /**
