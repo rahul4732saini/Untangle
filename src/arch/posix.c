@@ -147,7 +147,7 @@ static bool load_plugin(char *path, index_t inx)
 
     // Allocates heap memory for a separate buffer to store the
     // library file path along with the plugin data.
-    char *file_path = (char *)malloc(strlen(path));
+    char *file_path = (char *)malloc(strlen(path) + 1);
     strcpy(file_path, path);
 
     // Stores the library handler and the plugin data.
