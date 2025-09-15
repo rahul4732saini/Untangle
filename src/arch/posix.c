@@ -115,6 +115,10 @@ PluginsData *get_plugins(void)
 
     char *dir_path = get_plugin_dir();
 
+    // Returns if the plugin directory does not exist.
+    if (!verify_directory(dir_path))
+        return NULL;
+
     len_t file_cnt = get_plugin_count(dir_path);
     len_t dir_path_len = strlen(dir_path);
 
