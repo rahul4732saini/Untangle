@@ -90,6 +90,68 @@ static len_t get_plugin_count(char *path)
 }
 
 /**
+ * @brief Loads plugin data from the specified library file and saves it.
+ *
+ * @details Loads the specified dynamic library file and saves the handler
+ * and plugin data at the given index in the associated arrays.
+ *
+ * @param path Absolute path to the plugin library file.
+ * @param inx Index to use for storing the data in the arrays.
+ *
+ * @return A boolean true if the process was successful, and false if
+ * there was an error.
+ */
+static bool load_plugin(char *path, index_t inx)
+{
+    HMODULE lib = LoadLibrary(path);
+
+    // Fails if the library cannot be opened successfully.
+    if (!lib)
+        return false;
+
+    Domains *domains = (Domains *)GetProcAddress(lib, plugin_domains_var);
+    char **name = (char **)GetProcAddress(lib, plugin_name_var);
+
+    // Fails if the target symbols cannot be loaded from the library.
+    if (!domains || !name)
+    {
+        FreeLibrary(lib);
+        return false;
+    }
+
+    len_t plugin_name_len = strlen(name) + 1;
+
+    // Reduces the length of the buffer if the name is longer than the
+    // maximum allowance.
+    if (plugin_name_len > max_plugin_name_len)
+        plugin_name_len = max_plugin_name_len;
+
+    // Uses a separate buffer to store the plugin name to ensure
+    // accessibility even if the library is closed during runtime.
+    char *plugin_name = (char *)malloc(plugin_name_len);
+
+    // Copies the plugin name to the buffer.
+    strncpy(plugin_name, name, plugin_name_len);
+    plugin_name[plugin_name_len - 1] = 0;
+
+    // Allocates heap memory for a separate buffer to store the
+    // library file path along with the plugin data.
+    char *file_path = (char *)malloc(strlen(path) + 1);
+    strcpy(file_path, path);
+
+    // Stores the library handler and the plugin data.
+    handlers[inx] = lib;
+    plugins.plugins[inx] = (PluginData){
+        .name = plugin_name,
+        .path = file_path,
+        .domains = domains,
+        .enabled = true,
+    };
+
+    return true;
+}
+
+/**
  * @brief Extracts plugin data from the plugin libraries.
  */
 PluginsData *get_plugins(void)
