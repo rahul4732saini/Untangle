@@ -184,7 +184,7 @@ PluginsData *get_plugins(void)
             continue;
 
         // Creates a separate buffer to store the absolute path of the library file.
-        char buff[dir_path_len + strlen(fs_entry.cFileName)];
+        char buff[dir_path_len + strlen(fs_entry.cFileName) + 1];
         strcpy(buff, dir_path);
         strcat(buff, fs_entry.cFileName);
 
