@@ -9,6 +9,7 @@
 #include <dirent.h>
 #include <stdbool.h>
 #include <dlfcn.h>
+#include <sys/stat.h>
 
 #include "consts.h"
 #include "typedefs.h"
@@ -66,8 +67,8 @@ static char *get_plugin_dir(void)
     len_t size = DEFAULT_PATH_BUFF_SIZE;
     char *buff = (char *)malloc(size);
 
-    // Expands the buffer until it is too small to contain the
-    // absolute path to the current directory.
+    // Expands the buffer until it is big enough to store the absolute
+    // path to the current directory.
     while (!(getcwd(buff, size)))
     {
         size += PATH_BUFF_INC_STEP;
@@ -87,7 +88,7 @@ static char *get_plugin_dir(void)
 }
 
 /**
- * @brief Extracts the number of plugin files within a directory.
+ * @brief Extracts the number of plugin files within the specified directory.
  */
 static len_t get_plugin_count(char *path)
 {
