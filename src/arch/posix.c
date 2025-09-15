@@ -16,7 +16,7 @@
 #include "structs.h"
 
 #define DEFAULT_PATH_BUFF_SIZE 256
-#define PATH_BUFF_INC_STEP 8
+#define PATH_BUFF_INC_STEP 16
 
 static const char *lib_file_suffix = ".so";
 static const len_t lib_file_suffix_len = 3;
