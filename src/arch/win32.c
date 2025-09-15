@@ -204,6 +204,58 @@ PluginsData *get_plugins(void)
 }
 
 /**
+ * @brief Toggles the availability of the plugin stored at the given index.
+ *
+ * @details If enabled, disables the plugin closing the associated library
+ * and resetting associated member variables. Whereas if disabled, loads the
+ * library into memory, resolves target symbols, and updates the plugin data.
+ *
+ * @param inx Index of the plugin in the plugins array to be toggled.
+ * @return Boolean value indicating whether the operation was a success.
+ */
+bool toggle_plugin(index_t inx)
+{
+    if (inx >= plugin_count)
+        return false;
+
+    PluginData *plugin = plugins.plugins + inx;
+
+    // Disables the plugin if currently enabled.
+    if (plugin->enabled)
+    {
+        FreeLibrary(handlers[inx]);
+
+        // Resets the variables upon library closure.
+        plugin->domains = NULL;
+        plugin->enabled = false;
+
+        return true;
+    }
+
+    HMODULE lib = LoadLibrary(plugin->path);
+
+    // Fails if the library cannot be opened successfully.
+    if (!lib)
+        return false;
+
+    Domains *domains = GetProcAddress(lib, plugin_domains_var);
+
+    // Fails if the target symbol cannot be loaded from the library.
+    if (!domains)
+    {
+        FreeLibrary(lib);
+        return false;
+    }
+
+    // Adds the library handler to the handlers array and updates plugin data.
+    handlers[inx] = lib;
+    plugin->domains = domains;
+    plugin->enabled = true;
+
+    return true;
+}
+
+/**
  * @details Closes the plugin libraries and frees up heap memory.
  */
 void clean_plugins(void)
