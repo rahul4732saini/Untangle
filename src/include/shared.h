@@ -24,6 +24,7 @@ typedef struct
 typedef struct
 {
     char *name;
+    char *path;
     Domains *domains;
     bool enabled;
 } PluginData;
