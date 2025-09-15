@@ -130,7 +130,7 @@ static bool load_plugin(char *path, index_t inx)
         return false;
     }
 
-    len_t plugin_name_len = strlen(name);
+    len_t plugin_name_len = strlen(name) + 1;
 
     // Reduces the length of the buffer if the name is longer than the
     // maximum allowance.
