@@ -53,7 +53,7 @@ static bool is_valid_plugin_file(WIN32_FIND_DATA *fs_entry)
  */
 static char *get_plugin_dir(void)
 {
-    char *buff = (char *)malloc(MAX_PATH + strlen(plugin_dir) + 2);
+    char *buff = (char *)malloc(MAX_PATH + strlen(plugin_dir) + 1);
     len_t length = GetCurrentDirectory(MAX_PATH, buff);
 
     // Adds the relative path to the plugin directory at the end and
