@@ -200,29 +200,9 @@ PluginsData *get_plugins(void)
         strcpy(buff, dir_path);
         strcat(buff, entry->d_name);
 
-        void *handler = dlopen(buff, lib_open_mode);
-
-        // Continues if the library cannot be opened successfully.
-        if (!handler)
-            continue;
-
-        Domains *domains = (Domains *)dlsym(handler, plugin_domains_var);
-        char **name = (char **)dlsym(handler, plugin_name_var);
-
-        // Continues if the target variables couldn't be loaded from the library.
-        if (!domains || !name)
-        {
-            dlclose(handler);
-            continue;
-        }
-
-        // Stores the library handler and the plugin data.
-        handlers[ctr] = handler;
-        plugins.plugins[ctr++] = (PluginData){
-            .name = *name,
-            .domains = domains,
-            .enabled = true,
-        };
+        // Updates the counter if the library is successfully loaded.
+        if (load_plugin(buff, ctr))
+            ++ctr;
     }
 
     // Saves the counter for future usage.
