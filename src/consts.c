@@ -9,6 +9,9 @@
 // Relative path to the plugin directory.
 const char *plugin_dir = "plugin/";
 
+// Maximum size of the buffer to store the plugin name.
+const len_t max_plugin_name_len = 256;
+
 // Name of the variables declared by plugin libraries, used for
 // locating the associated symbols in the plugin.
 const char *plugin_domains_var = "domains";
