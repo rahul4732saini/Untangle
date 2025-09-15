@@ -229,11 +229,13 @@ void clean_plugins(void)
     if (!handlers)
         return;
 
-    // Frees the memory allocated for the plugin names and closes all
+    // Frees the memory allocated for storing plugin data, and closes all
     // the dynamically loaded libraries.
     for (len_t i = 0; i < plugin_count; ++i)
     {
+        free(plugins.plugins[i].path);
         free(plugins.plugins[i].name);
+
         dlclose(handlers[i]);
     }
 
