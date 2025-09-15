@@ -149,11 +149,17 @@ static bool load_plugin(char *path, index_t inx)
     strncpy(plugin_name, name, plugin_name_len);
     plugin_name[plugin_name_len - 1] = 0;
 
+    // Allocates heap memory for a separate buffer to store the
+    // library file path along with the plugin data.
+    char *file_path = (char *)malloc(strlen(path));
+    strcpy(file_path, path);
+
     // Stores the library handler and the plugin data.
     handlers[inx] = handler;
     plugins.plugins[inx] = (PluginData){
-        .domains = domains,
         .name = plugin_name,
+        .path = file_path,
+        .domains = domains,
         .enabled = true,
     };
 
