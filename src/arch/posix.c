@@ -241,9 +241,9 @@ PluginsData *get_plugins(void)
 /**
  * @brief Toggles the availability of the plugin stored at the given index.
  *
- * @details If enabled, disables the plugin closing the associated library
- * and resetting associated member variables. Whereas if disabled, loads the
- * library into memory, resolves target symbols, and updates the plugin data.
+ * @details If enabled, disables the plugin closing the library and resetting
+ * the associated member variables. Whereas if disabled, loads the library into
+ * memory, resolves target symbols, and updates the plugin data.
  *
  * @param inx Index of the plugin in the plugins array to be toggled.
  * @return Boolean value indicating whether the operation was a success.
