@@ -65,11 +65,19 @@ static bool is_valid_plugin_file(WIN32_FIND_DATA *fs_entry)
 
 /**
  * @brief Extracts the absolute path to the plugin directory.
+ * @details Extracts and returns directory path, or NULL in case of an error.
  */
 static char *get_plugin_dir(void)
 {
     char *buff = (char *)malloc(MAX_PATH + strlen(plugin_dir) + 1);
     len_t length = GetCurrentDirectory(MAX_PATH, buff);
+
+    // Fails and returns if there was an error while extracting the current directory path.
+    if (!length)
+    {
+        free(buff);
+        return NULL;
+    }
 
     // Adds the relative path to the plugin directory at the end and
     // converts it into a Windows compatible path.
