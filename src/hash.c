@@ -57,7 +57,6 @@ void add_table_data(HashTable *table, void *data)
         return;
 
     BucketNode *bucket = (BucketNode *)malloc(sizeof(BucketNode));
-    bucket->data = data;
 
     // Calculates the index of the bucket for storing the data.
     hash_t hash = get_hash(table->key_extractor(data));
