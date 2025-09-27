@@ -39,6 +39,16 @@ static char *convert_unix_path(char *path)
 }
 
 /**
+ * @brief Verifies whether the specified path points to an existing directory.
+ * @param path Absolute path to the directory.
+ */
+static bool verify_directory(char *path)
+{
+    DWORD attrs = GetFileAttributes(path);
+    return attrs != INVALID_FILE_ATTRIBUTES && attrs & FILE_ATTRIBUTE_DIRECTORY;
+}
+
+/**
  * @brief Validates the specified directory entry for a plugin file.
  */
 static bool is_valid_plugin_file(WIN32_FIND_DATA *fs_entry)
