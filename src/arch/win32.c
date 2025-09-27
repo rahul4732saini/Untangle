@@ -50,6 +50,7 @@ static bool verify_directory(char *path)
 
 /**
  * @brief Validates the specified directory entry for a plugin file.
+ * @param entry Directory entry of the file to be validated.
  */
 static bool is_valid_plugin_file(WIN32_FIND_DATA *fs_entry)
 {
@@ -89,6 +90,11 @@ static char *get_plugin_dir(void)
 
 /**
  * @brief Extracts the number of plugin files within the specified directory.
+ *
+ * @details Extracts and returns the count of files present within the specified
+ * directory that adhere to the plugin file naming scheme.
+ *
+ * @param path Absolute path to the plugin directory.
  */
 static len_t get_plugin_count(char *path)
 {
@@ -229,9 +235,9 @@ PluginsData *get_plugins(void)
 /**
  * @brief Toggles the availability of the plugin stored at the given index.
  *
- * @details If enabled, disables the plugin closing the associated library
- * and resetting associated member variables. Whereas if disabled, loads the
- * library into memory, resolves target symbols, and updates the plugin data.
+ * @details If enabled, disables the plugin closing the library and resetting
+ * the associated member variables. Whereas if disabled, loads the library into
+ * memory, resolves target symbols, and updates the plugin data.
  *
  * @param inx Index of the plugin in the plugins array to be toggled.
  * @return Boolean value indicating whether the operation was a success.
