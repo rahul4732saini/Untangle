@@ -1,3 +1,8 @@
+/**
+ * @file hash.c
+ * @brief Defines hash-related data structures and utility functions.
+ */
+
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
