@@ -182,6 +182,9 @@ static bool load_plugin(char *path, index_t inx)
 
 /**
  * @brief Extracts plugin data from the plugin libraries.
+ *
+ * @details Extracts plugin data from the dynamically loaded libraries and returns
+ * a pointer to the PluginsData struct comprising them, or NULL if unsuccessful.
  */
 PluginsData *get_plugins(void)
 {
@@ -189,6 +192,11 @@ PluginsData *get_plugins(void)
         return &plugins;
 
     char *dir_path = get_plugin_dir();
+
+    // Fails and returns if there was an error while extracting the directory path
+    // or the directory does not exist.
+    if (!dir_path || !verify_directory(dir_path))
+        return NULL;
 
     len_t file_cnt = get_plugin_count(dir_path);
     len_t dir_path_len = strlen(dir_path);
