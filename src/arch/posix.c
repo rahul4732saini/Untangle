@@ -33,7 +33,8 @@ static PluginsData plugins;
 static len_t plugin_count;
 
 /**
- * @brief Verifies whether the path exists and points to a valid directory.
+ * @brief Verifies whether the specified path points to a existing directory.
+ * @param path Absolute path to the directory.
  */
 static bool verify_directory(char *path)
 {
@@ -43,6 +44,7 @@ static bool verify_directory(char *path)
 
 /**
  * @brief Validates the specified directory entry for a plugin file.
+ * @param entry Directory entry of the file to be validated.
  */
 static bool is_valid_plugin_file(struct dirent *entry)
 {
@@ -96,6 +98,11 @@ static char *get_plugin_dir(void)
 
 /**
  * @brief Extracts the number of plugin files within the specified directory.
+ *
+ * @details Extracts and returns the count of files present within the specified
+ * directory that adhere to the plugin file naming scheme.
+ *
+ * @param path Absolute path to the plugin directory.
  */
 static len_t get_plugin_count(char *path)
 {
@@ -175,6 +182,9 @@ static bool load_plugin(char *path, index_t inx)
 
 /**
  * @brief Extracts plugin data from the plugin libraries.
+ *
+ * @details Extracts plugin data from the dynamically loaded libraries and returns
+ * a pointer to the PluginsData struct comprising them, or NULL if unsuccessful.
  */
 PluginsData *get_plugins(void)
 {
