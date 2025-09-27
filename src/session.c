@@ -7,7 +7,7 @@
 
 #include "typedefs.h"
 #include "consts.h"
-#include "arch.h"
+#include "platform.h"
 #include "hash.h"
 #include "shared.h"
 
