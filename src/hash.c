@@ -35,6 +35,7 @@ HashTable *init_hash_table(len_t size, char *(*key_extractor)(void *))
 {
     HashTable *table = (HashTable *)malloc(sizeof(HashTable));
 
+    // Allocates memory for the buckets and initializes the table structure.
     *table = (HashTable){
         .buckets = (BucketNode **)calloc(size, sizeof(BucketNode *)),
         .size = size,
@@ -45,19 +46,20 @@ HashTable *init_hash_table(len_t size, char *(*key_extractor)(void *))
 }
 
 /**
- * @brief Stores the given data into the hash table.
- * @param table Pointer to the HashTable struct comprising the
- * hash table data.
+ * @brief Stores the given data in the specified hash table.
+ * @param table Pointer to the HashTable struct comprising the hash table data.
  * @param data Pointer to the data to be stored in the table.
  */
 void add_table_data(HashTable *table, void *data)
 {
+    // Avoids re-addition if the data is already present within the table.
     if (get_table_data(table, table->key_extractor(data)))
         return;
 
     BucketNode *bucket = (BucketNode *)malloc(sizeof(BucketNode));
     bucket->data = data;
 
+    // Calculates the index of the bucket for storing the data.
     hash_t hash = get_hash(table->key_extractor(data));
     index_t pos = hash % table->size;
 
@@ -71,11 +73,12 @@ void add_table_data(HashTable *table, void *data)
 
 /**
  * @details Extracts the data from the hash table by matching the keys.
- * @param Pointer to the HashTable struct comprising the hash table
- * data.
+ *
+ * @param table Pointer to the HashTable struct comprising the hash table data.
  * @param key The string whose hash will be used for finding the data.
- * @return A pointer to the data is returned if found, or NULL to
- * indicate failure in lookup.
+ *
+ * @return A pointer to the data is returned if found, or NULL to indicate
+ * failure in lookup.
  */
 void *get_table_data(HashTable *table, char *key)
 {
@@ -106,7 +109,10 @@ void free_hash_table(HashTable *table)
     {
         while (table->buckets[i])
         {
+            // Stores pointer to the current node, to free it while still
+            // maintaining the pointer to the next node.
             BucketNode *bucket = table->buckets[i];
+
             table->buckets[i] = table->buckets[i]->next;
             free(bucket);
         }
