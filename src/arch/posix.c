@@ -9,6 +9,7 @@
 #include <dirent.h>
 #include <stdbool.h>
 #include <dlfcn.h>
+#include <errno.h>
 #include <sys/stat.h>
 
 #include "consts.h"
@@ -57,6 +58,7 @@ static bool is_valid_plugin_file(struct dirent *entry)
 
 /**
  * @brief Extracts the absolute path to the plugin directory.
+ * @details Extracts and returns directory path, or NULL in case of an error.
  */
 static char *get_plugin_dir(void)
 {
@@ -67,6 +69,15 @@ static char *get_plugin_dir(void)
     // path to the current directory.
     while (!(getcwd(buff, size)))
     {
+
+        // Fails and returns if the error is not due to insufficient buffer
+        // size suggesting an unmanageable error.
+        if (errno != ERANGE)
+        {
+            free(buff);
+            return NULL;
+        }
+
         size += PATH_BUFF_INC_STEP;
         buff = (char *)realloc(buff, size);
     }
