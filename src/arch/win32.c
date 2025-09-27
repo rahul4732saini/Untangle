@@ -23,14 +23,19 @@ len_t plugin_count;
 
 /**
  * @brief Converts the specified UNIX path into a valid Windows path.
+ *
+ * @details Converts the path by replacing instances of the forward-slash(/)
+ * character with the backward-slash(\).
+ *
+ * @param path Pointer to the buffer comprising the path to be converted.
  */
-static char *convert_unix_path(char *src)
+static char *convert_unix_path(char *path)
 {
-    for (char *ptr = src; *ptr; ++ptr)
+    for (char *ptr = path; *ptr; ++ptr)
         if (*ptr == '/')
             *ptr = '\\';
 
-    return src;
+    return path;
 }
 
 /**
