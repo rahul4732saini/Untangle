@@ -38,7 +38,7 @@ static char *get_problem_name(void *data)
 }
 
 /**
- * @brief Fress the memory allocated for storing fields
+ * @brief Fress the heap memory allocated for storing the fields
  * and their associated problems.
  *
  * @param domain Pointer to the domain struct comprising
@@ -46,12 +46,12 @@ static char *get_problem_name(void *data)
  */
 static void clean_field_tree(Domain *domain)
 {
-    for (len_t i = 0; i < domain->size; ++i)
+    for (index_t i = 0; i < domain->size; ++i)
     {
         Field *field = domain->fields[i];
 
-        for (len_t i = 0; i < field->size; ++i)
-            free(field->problems[i]);
+        for (index_t j = 0; j < field->size; ++j)
+            free(field->problems[j]);
 
         free(field);
     }
