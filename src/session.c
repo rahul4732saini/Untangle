@@ -112,6 +112,8 @@ static void merge_problems(Field *dest, Field *src)
 
         ++dest->size;
     }
+
+    free_hash_table(table);
 }
 
 /**
@@ -146,6 +148,8 @@ static void merge_fields(Domain *dest, Domain *src)
         // Merges the problems present within the structures.
         merge_problems(field, src->fields[i]);
     }
+
+    free_hash_table(table);
 }
 
 /**
@@ -177,6 +181,8 @@ static void merge_domains(Domains *dest, Domains *src)
 
         merge_fields(domain, src->domains[i]);
     }
+
+    free_hash_table(table);
 }
 
 /**
