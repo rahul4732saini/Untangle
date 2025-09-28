@@ -243,12 +243,16 @@ bool switch_plugin(index_t inx)
 
 /**
  * @brief Fress the memory allocated for the domain tree and
- * the plugins.
+ *  plugins, and resets session data.
  */
 void clean_session_data(void)
 {
     clean_domain_tree();
     clean_plugins();
 
+    free(sdata.domains->domains);
     free(sdata.domains);
+
+    // Resets all members to the default state (NULL).
+    memset(&sdata, 0, sizeof(SessionData));
 }
