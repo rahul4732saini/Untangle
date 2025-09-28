@@ -69,11 +69,18 @@ static void clean_domain_tree(void)
 {
     for (len_t i = 0; i < sdata.domains->size; ++i)
     {
-        clean_field_tree(sdata.domains->domains[i]);
-        free(sdata.domains->domains[i]);
+        Domain *domain = sdata.domains->domains[i];
+
+        clean_field_tree(domain);
+        free(domain);
     }
 
-    sdata.domains->size = 0; // Resets the domains count.
+    // Frees the memory allocated for the domains array.
+    free(sdata.domains->domains);
+
+    // Resets the domains struct members to their defaults.
+    sdata.domains->domains = NULL;
+    sdata.domains->size = 0;
 }
 
 /**
