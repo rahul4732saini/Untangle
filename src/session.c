@@ -192,10 +192,13 @@ static void build_domain_tree(void)
     // single struct.
     for (index_t i = 0; i < sdata.plugins->size; ++i)
     {
-        if (!sdata.plugins->plugins[i].enabled)
+        PluginData *plugin = &sdata.plugins->plugins[i];
+
+        // Skips if the plugin is disabled.
+        if (!plugin->enabled)
             continue;
 
-        merge_domains(sdata.domains, sdata.plugins->plugins[i].domains);
+        merge_domains(sdata.domains, plugin->domains);
     }
 }
 
