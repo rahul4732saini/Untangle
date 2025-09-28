@@ -1,5 +1,6 @@
 /**
- * @brief Defines functions for handling session-related data.
+ * @file session.c
+ * @brief Defines functions for initializing and managing session-related data.
  */
 
 #include <stdlib.h>
@@ -15,6 +16,7 @@ static SessionData sdata;
 
 /**
  * @brief Extracts the domain name from the specified Domain struct.
+ * @param data Pointer to the Domain struct.
  */
 static char *get_domain_name(void *data)
 {
@@ -23,6 +25,7 @@ static char *get_domain_name(void *data)
 
 /**
  * @brief Extracts the field name from the specified Field struct.
+ * @param data Pointer to the Field struct.
  */
 static char *get_field_name(void *data)
 {
@@ -31,6 +34,7 @@ static char *get_field_name(void *data)
 
 /**
  * @brief Extracts the problem name from the specified Problem struct.
+ * @param data Pointer to the Problem struct.
  */
 static char *get_problem_name(void *data)
 {
