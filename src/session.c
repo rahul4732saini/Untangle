@@ -211,13 +211,24 @@ SessionData *get_session_data(void)
 }
 
 /**
- * @brief Toggles the current availability of the plugin to mark
- * it enabled or disabled.
+ * @brief Toggles the current availability of the plugin.
+ *
+ * @details Toggles the plugin stored at the specified index in
+ * the plugins array, and re-builds the domain tree if successful.
+ *
+ * @param inx Index of the plugin in the plugins array.
+ * @return Boolean value signifying whether the switching operation
+ * was successful.
  */
-void toggle_plugin(PluginData *plugin)
+bool switch_plugin(index_t inx)
 {
-    plugin->enabled = !plugin->enabled;
-    build_domain_tree();
+    if (toggle_plugin(inx))
+    {
+        build_domain_tree();
+        return true;
+    }
+
+    return false;
 }
 
 /**
